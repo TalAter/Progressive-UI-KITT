@@ -2,4 +2,5 @@ node_modules
 .grunt
 .idea
 .sass-cache
+test/coverage/
 .DS_Store
