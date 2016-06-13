@@ -25,6 +25,5 @@
   "white"     : false,
   "indent"    : 2,
   "globals":  {
-    "annyang":            false
   }
 }
