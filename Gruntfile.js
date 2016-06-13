@@ -34,6 +34,17 @@ module.exports = function(grunt) {
       files: ['src/progressive-ui-kitt.js', 'test/specs/*Spec.js', '!**/node_modules/**'],
       tasks: ['default']
     },
+    connect: {
+      server: {
+        options: {
+          protocol: 'https',
+          port: 8443,
+          hostname: '*',
+          base: '.',
+          open: 'https://localhost:8443/demo'
+        }
+      }
+    },
     jasmine: {
       testAndCoverage: {
         src: ['dist/progressive-ui-kitt.js'],
@@ -72,11 +83,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
-  // Default task(s).
+  // Register tasks.
   grunt.registerTask('default', ['jshint', 'browserify', 'jasmine']);
-
-  // Test task
   grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('serve', ['default', 'connect', 'watch']);
 
 };
