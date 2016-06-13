@@ -13,15 +13,21 @@ module.exports = function(grunt) {
         jshintrc: true
       }
     },
-    uglify: {
-      dist: {
+    browserify: {
+      standalone: {
+        src: [ 'src/progressive-ui-kitt.js' ],
+        dest: 'dist/progressive-ui-kitt.js',
         options: {
-          preserveComments: /^\! /
-        },
-        files: {
-          'dist/progressive-ui-kitt.min.js': ['src/progressive-ui-kitt.js']
+          plugin: [
+            [ "minifyify", { output: "dist/progressive-ui-kitt.js.map", map: 'progressive-ui-kitt.js.map' } ],
+            [ "browserify-header" ]
+          ],
+          browserifyOptions: {
+            standalone: 'puikitt',
+            debug: true
+          }
         }
-      }
+      },
     },
     watch: {
       files: ['src/progressive-ui-kitt.js', '!**/node_modules/**'],
@@ -30,12 +36,12 @@ module.exports = function(grunt) {
   });
 
   // Load NPM Tasks
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'browserify']);
 
   // Test task
   grunt.registerTask('test', ['jshint']);
