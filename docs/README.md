@@ -34,6 +34,10 @@ it will be updated)
 
 * *string* stylesheet relative or absolute url to the stylesheet
 
+## deleteMessages()
+
+Deletes all exisitng messages from KITT and removes them from the DOM
+
 ## addMessage(string)
 
 Draws a new message to the GUI
