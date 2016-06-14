@@ -45,6 +45,16 @@ module.exports = function(grunt) {
         }
       }
     },
+    sass: {
+      dist: {
+        options: {
+          style: 'compressed'
+        },
+        files: {
+          'dist/themes/basic.css': 'themes/basic.scss'
+        }
+      }
+    },
     jasmine: {
       testAndCoverage: {
         src: ['dist/progressive-ui-kitt.js'],
@@ -84,10 +94,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Register tasks.
   grunt.registerTask('default', ['jshint', 'browserify', 'jasmine']);
   grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'browserify', 'sass', 'jasmine']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
 
 };
