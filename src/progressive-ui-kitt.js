@@ -13,6 +13,8 @@ var _stylesheetNode;
 
 var _guiNodes;
 
+var _messages = [];
+
 // Checks if GUI was already created
 var _guiCreated = function () {
   return _guiNodes !== undefined;
@@ -44,6 +46,31 @@ var _createGUI = function() {
 
   _updateStylesheet();
 };
+
+// Adds a new message and draws it
+var _addMessage = function(contents) {
+  if (typeof contents !== 'string' || !_guiCreated()) {
+    return;
+  }
+  var messageId = _messages.length+Date.now();
+
+  var newMessageNode = document.createElement('div');
+  newMessageNode.id = 'progressivekitt-message-'+messageId;
+  newMessageNode.innerHTML = contents;
+  newMessageNode.classList.add('progressivekitt-message');
+
+  var newMessage = {
+    id: messageId,
+    contents: contents
+  };
+
+  _messages.push(newMessage);
+
+  _guiNodes.appendChild(newMessageNode);
+
+  return messageId;
+};
+
 
 /**
  * Call after configuring KITT, to render its interface.
@@ -85,8 +112,30 @@ var setStylesheet = function(stylesheet) {
   _updateStylesheet();
 };
 
+var deleteMessages = function() {
+  var message;
+  while ((message = _messages.shift()) !== undefined) {
+    var node = document.getElementById('progressivekitt-message-'+message.id);
+    if (node.parentNode) {
+      node.parentNode.removeChild(node);
+    }
+  }
+};
+
+/**
+ * Draws a new message to the GUI
+ *
+ * @param string contents the contents of the message (text or HTML)
+ * @method addMessage
+ */
+var addMessage = function(contents) {
+  return _addMessage(contents);
+};
+
 module.exports = {
   setStylesheet: setStylesheet,
   vroom: vroom,
-  render: render
+  render: render,
+  addMessage: addMessage,
+  deleteMessages: deleteMessages
 };

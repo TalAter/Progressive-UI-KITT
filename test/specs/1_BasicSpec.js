@@ -19,10 +19,23 @@
       expect(ProgressiveKITT.render).toEqual(jasmine.any(Function));
     });
 
+    it('should contain addMessage method', function () {
+      expect(ProgressiveKITT.addMessage).toEqual(jasmine.any(Function));
+    });
+
+    it('should contain deleteMessages method', function () {
+      expect(ProgressiveKITT.deleteMessages).toEqual(jasmine.any(Function));
+    });
+
+    xit('should contain debug method', function () {
+      expect(ProgressiveKITT.debug).toEqual(jasmine.any(Function));
+    });
+
     it('should not expose private methods', function () {
       expect(ProgressiveKITT._createGUI).toBe(undefined);
       expect(ProgressiveKITT._updateStylesheet).toBe(undefined);
       expect(ProgressiveKITT._guiCreated).toBe(undefined);
+      expect(ProgressiveKITT._addMessage).toBe(undefined);
     });
 
   });

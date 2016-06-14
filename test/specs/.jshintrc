@@ -38,6 +38,8 @@
     "getStyleSheets":         false,
     "getStyleSheet":          false,
     "getWrappers":            false,
-    "getWrapper":             false
+    "getWrapper":             false,
+    "getMessages":            false,
+    "getLatestMessage":       false
   }
 }

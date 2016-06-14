@@ -16,6 +16,14 @@ var getStyleSheet = function() {
   return getStyleSheets()[0];
 };
 
+var getMessages = function() {
+  return $('.progressivekitt-message');
+};
+
+var getLatestMessage = function() {
+  return getMessages().last();
+};
+
 var simulateClick = function(element) {
   var event = document.createEvent("MouseEvents");
   event.initEvent("click", true, false);
