@@ -97,9 +97,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Register tasks.
-  grunt.registerTask('default', ['jshint', 'browserify', 'jasmine']);
-  grunt.registerTask('test', ['jshint']);
   grunt.registerTask('default', ['jshint', 'browserify', 'sass', 'jasmine']);
+  grunt.registerTask('test', ['jshint', 'jasmine']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
 
 };
