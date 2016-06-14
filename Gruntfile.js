@@ -55,6 +55,13 @@ module.exports = function(grunt) {
         }
       }
     },
+    markdox: {
+      dist: {
+        files: [
+          {src: 'src/progressive-ui-kitt.js', dest: 'docs/README.md'}
+        ]
+      }
+    },
     jasmine: {
       testAndCoverage: {
         src: ['dist/progressive-ui-kitt.js'],
@@ -98,9 +105,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-markdox');
 
   // Register tasks.
-  grunt.registerTask('default', ['jshint', 'browserify', 'sass', 'jasmine']);
+  grunt.registerTask('default', ['jshint', 'browserify', 'sass', 'jasmine', 'markdox']);
   grunt.registerTask('test', ['jshint', 'jasmine']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
 
