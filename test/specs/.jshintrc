@@ -32,6 +32,11 @@
     "jasmine":                false,
     "it":                     false,
     "xit":                    false,
-    "puikitt":                false
+    "$":                      false,
+    "puikitt":                false,
+    "getStyleSheets":         false,
+    "getStyleSheet":          false,
+    "getWrappers":            false,
+    "getWrapper":             false
   }
 }

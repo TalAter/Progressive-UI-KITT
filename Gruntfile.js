@@ -31,7 +31,7 @@ module.exports = function(grunt) {
       },
     },
     watch: {
-      files: ['src/progressive-ui-kitt.js', 'test/specs/*Spec.js', '!**/node_modules/**'],
+      files: ['src/progressive-ui-kitt.js', 'test/specs/*Spec.js', 'test/helper_functions.js', '!**/node_modules/**'],
       tasks: ['default']
     },
     connect: {
@@ -61,6 +61,9 @@ module.exports = function(grunt) {
         options: {
           specs: ['test/specs/*Spec.js'],
           outfile: 'test/SpecRunner.html',
+          polyfills: ['test/helper_functions.js'],
+          vendor: ['test/vendor/jquery-2.1.4.min.js', 'test/vendor/jasmine-jquery.js'],
+          styles: ['dist/themes/basic.css'],
           keepRunner: true,
           template: require('grunt-template-jasmine-istanbul'),
           templateOptions: {
@@ -77,9 +80,9 @@ module.exports = function(grunt) {
               }
             ],
             thresholds: {
-              statements: 50,
-              branches: 30,
-              functions: 80,
+              statements: 60,
+              branches: 40,
+              functions: 90,
               lines: 90
             }
           }
