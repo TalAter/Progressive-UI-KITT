@@ -27,7 +27,7 @@ var _updateStylesheet = function() {
       _stylesheetNode = document.createElement('link');
       _stylesheetNode.rel = 'stylesheet';
       _stylesheetNode.href = _stylesheet;
-      _stylesheetNode.id = 'puikitt-style-sheet';
+      _stylesheetNode.id = 'progressivekitt-style-sheet';
       document.body.appendChild(_stylesheetNode);
     }
   }
@@ -37,7 +37,7 @@ var _updateStylesheet = function() {
 var _createGUI = function() {
   // create GUI
   _guiNodes = document.createElement('div');
-  _guiNodes.id = 'puikitt-ui';
+  _guiNodes.id = 'progressivekitt-ui';
   _guiNodes.innerHTML = '';
   _guiNodes.style.display = 'none';
   document.body.appendChild(_guiNodes);
@@ -48,7 +48,7 @@ var _createGUI = function() {
 /**
  * Call after configuring KITT, to render its interface.
  *
- * Identical to calling `puikitt.render();` but less magical.
+ * Identical to calling `ProgressiveKITT.render();` but less magical.
  *
  * @method vroom
  * @see [render()](#render)

@@ -33,7 +33,7 @@
     "it":                     false,
     "xit":                    false,
     "$":                      false,
-    "puikitt":                false,
+    "ProgressiveKITT":        false,
     "getStyleSheets":         false,
     "getStyleSheet":          false,
     "getWrappers":            false,

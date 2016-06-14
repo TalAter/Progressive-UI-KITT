@@ -24,7 +24,7 @@ module.exports = function(grunt) {
             [ "browserify-header" ]
           ],
           browserifyOptions: {
-            standalone: 'puikitt',
+            standalone: 'ProgressiveKITT',
             debug: true
           }
         }

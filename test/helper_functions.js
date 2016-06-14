@@ -1,7 +1,7 @@
 "use strict";
 
 var getWrappers = function() {
-  return $('div#puikitt-ui');
+  return $('div#progressivekitt-ui');
 };
 
 var getWrapper = function() {
@@ -9,7 +9,7 @@ var getWrapper = function() {
 };
 
 var getStyleSheets = function() {
-  return $('#puikitt-style-sheet');
+  return $('#progressivekitt-style-sheet');
 };
 
 var getStyleSheet = function() {
