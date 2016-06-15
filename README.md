@@ -4,6 +4,12 @@
 
 Progressive UI KITT makes it easy to add a GUI to progressive web apps.
 
+## Speech KITT is currently under heavy construction!
+
+Feel free to **Star** and **Watch** it, but watch out for falling debris, and a wildly changing API.
+
+Feedback and contributions are always welcome and appreciated.
+
 ### Author
 
 Tal Ater: [@TalAter](https://twitter.com/TalAter)
