@@ -139,10 +139,41 @@ var addMessage = function(contents) {
   return _addMessage(contents);
 };
 
+/**
+ * Call to hide the GUI.
+ *
+ * Interface must have been previously rendered with render()
+ *
+ * @method hide
+ */
+var hide = function() {
+  if (!_guiCreated()) {
+    throw new TypeError('cannot hide interface. Must be rendered first');
+  }
+  _guiNodes.classList.add('progressivekitt-ui--hidden');
+};
+
+/**
+ * Call to show the GUI if it has been hidden with hide()
+ *
+ * Interface must have been previously rendered with render()
+ *
+ * @method show
+ */
+var show = function() {
+  if (!_guiCreated()) {
+    throw new TypeError('cannot show interface. Must be rendered first');
+  }
+  _guiNodes.classList.remove('progressivekitt-ui--hidden');
+};
+
+
 module.exports = {
   setStylesheet: setStylesheet,
   vroom: vroom,
   render: render,
   addMessage: addMessage,
-  deleteMessages: deleteMessages
+  deleteMessages: deleteMessages,
+  show: show,
+  hide: hide
 };

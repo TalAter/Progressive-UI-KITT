@@ -46,5 +46,17 @@ Draws a new message to the GUI
 
 * *string* contents the contents of the message (text or HTML)
 
+## hide()
+
+Call to hide the GUI.
+
+Interface must have been previously rendered with render()
+
+## show()
+
+Call to show the GUI if it has been hidden with hide()
+
+Interface must have been previously rendered with render()
+
 <!-- End src/progressive-ui-kitt.js -->
 

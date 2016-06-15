@@ -148,6 +148,7 @@
 
   });
 
+
   describe('ProgressiveKITT.deleteMessages', function() {
 
     beforeEach(function() {
@@ -178,6 +179,43 @@
     });
 
   });
+
+
+  describe('ProgressiveKITT.hide', function() {
+
+    beforeEach(function() {
+      ProgressiveKITT.vroom();
+    });
+
+    it('should add progressivekitt-ui--hidden class to the GUI', function () {
+      ProgressiveKITT.show();
+      expect(getWrapper()).not.toHaveClass('progressivekitt-ui--hidden');
+      expect(getWrapper()).toBeVisible();
+      ProgressiveKITT.hide();
+      expect(getWrapper()).toHaveClass('progressivekitt-ui--hidden');
+      expect(getWrapper()).not.toBeVisible();
+    });
+
+  });
+
+
+  describe('ProgressiveKITT.show', function() {
+
+    beforeEach(function() {
+      ProgressiveKITT.vroom();
+    });
+
+    it('should remove progressivekitt-ui--hidden class from the GUI', function () {
+      ProgressiveKITT.hide();
+      expect(getWrapper()).toHaveClass('progressivekitt-ui--hidden');
+      expect(getWrapper()).not.toBeVisible();
+      ProgressiveKITT.show();
+      expect(getWrapper()).not.toHaveClass('progressivekitt-ui--hidden');
+      expect(getWrapper()).toBeVisible();
+    });
+
+  });
+
 
   xdescribe('ProgressiveKITT.debug', function() {
   });
