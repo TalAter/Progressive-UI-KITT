@@ -36,7 +36,7 @@ it will be updated)
 
 ## deleteMessages()
 
-Deletes all exisitng messages from KITT and removes them from the DOM
+Deletes all existing messages from KITT and removes them from the DOM
 
 ## addMessage(string)
 

@@ -115,8 +115,7 @@ var setStylesheet = function(stylesheet) {
 };
 
 /**
- *
- * Deletes all exisitng messages from KITT and removes them from the DOM
+ * Deletes all existing messages from KITT and removes them from the DOM
  *
  * @method deleteMessages
  */
