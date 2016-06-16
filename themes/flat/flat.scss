@@ -1,0 +1,46 @@
+@import '../basic';
+
+/* Variables */
+
+$messageBackgroundColor: #323232 !default;
+$messageFontColor: #f1f1f1 !default;
+$messageFontSize: 14px !default;
+$messageLineHeight: 18px !default;
+$messageFontFamily: 'Roboto', 'Noto', sans-serif !default;
+$messagePadding: 16px 24px !default;
+$messageBoxShadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
+$messageBorderRadius: 2px !default;
+
+#progressivekitt-ui .progressivekitt-message {
+  outline: none;
+  z-index: 999;
+  display: block;
+  position: fixed;
+  background-color: $messageBackgroundColor;
+  color: $messageFontColor;
+  font-family: $messageFontFamily;
+  line-height: $messageLineHeight;
+  font-size: $messageFontSize;
+  -webkit-font-smoothing: antialiased;
+  min-height: 48px;
+  min-width: 288px;
+  padding: $messagePadding;
+  box-sizing: border-box;
+  box-shadow: $messageBoxShadow;
+  border-radius: $messageBorderRadius;
+  left: 0;
+  bottom: 0;
+  margin: 12px;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+  -webkit-transform: translateY(100px);
+  transform: translateY(100px);
+  cursor: default;
+}
+
+#progressivekitt-ui .progressivekitt-message--shown {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
