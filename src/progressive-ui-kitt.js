@@ -70,6 +70,10 @@ var _addMessage = function(contents) {
 
   _guiNodes.appendChild(newMessageNode);
 
+  window.requestAnimationFrame(function() {
+    newMessageNode.classList.add('progressivekitt-message--shown');
+  });
+
   return messageId;
 };
 

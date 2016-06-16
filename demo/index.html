@@ -1,6 +1,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1">
   <title>Progressive UI KITT</title>
   <style>
     body {
@@ -18,7 +20,7 @@
   (function() {
     var getRandomIntInclusive = function (min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    };
     var img = document.createElement('img');
     img.src = 'sample_sites/'+getRandomIntInclusive(1,4)+'.jpg';
     img.id = 'sample_site';
@@ -33,6 +35,8 @@
 
   // Render KITT's interface
   ProgressiveKITT.vroom();
+
+  ProgressiveKITT.addMessage('This is a progressive web app.');
 </script>
 </body>
 </html>
