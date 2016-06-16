@@ -38,13 +38,14 @@ it will be updated)
 
 Deletes all existing messages from KITT and removes them from the DOM
 
-## addMessage(string)
+## addMessage(string, Object)
 
 Draws a new message to the GUI
 
 ### Params:
 
 * *string* contents the contents of the message (text or HTML)
+* *Object* options Options for this message
 
 ## hide()
 

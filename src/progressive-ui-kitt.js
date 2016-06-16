@@ -50,10 +50,18 @@ var _createGUI = function() {
 };
 
 // Adds a new message and draws it
-var _addMessage = function(contents) {
-  if (typeof contents !== 'string' || !_guiCreated()) {
+var _addMessage = function(contents, options) {
+  if (!_guiCreated()) {
     return;
   }
+  if (typeof contents !== 'string') {
+    return;
+  }
+  options = options || {};
+  if (typeof options !== 'object') {
+    throw new TypeError('Invalid options object');
+  }
+
   var messageId = _messages.length+Date.now();
 
   var newMessageNode = document.createElement('div');
@@ -70,9 +78,21 @@ var _addMessage = function(contents) {
 
   _guiNodes.appendChild(newMessageNode);
 
-  window.requestAnimationFrame(function() {
+  setTimeout(function() {
     newMessageNode.classList.add('progressivekitt-message--shown');
-  });
+  }, 1);
+
+  if (isFinite(options.hideAfter) && options.hideAfter > 0) {
+    setTimeout(function() {
+      newMessageNode.classList.remove('progressivekitt-message--shown');
+      setTimeout(function() {
+        // @TODO: Refactor to _deleteMessage method
+        if (newMessageNode && newMessageNode.parentNode) {
+          newMessageNode.parentNode.removeChild(newMessageNode);
+        }
+      }, 1000);
+    }, options.hideAfter);
+  }
 
   return messageId;
 };
@@ -127,7 +147,7 @@ var deleteMessages = function() {
   var message;
   while ((message = _messages.shift()) !== undefined) {
     var node = document.getElementById('progressivekitt-message-'+message.id);
-    if (node.parentNode) {
+    if (node && node.parentNode) {
       node.parentNode.removeChild(node);
     }
   }
@@ -137,10 +157,12 @@ var deleteMessages = function() {
  * Draws a new message to the GUI
  *
  * @param string contents the contents of the message (text or HTML)
+ * @param Object options Options for this message
  * @method addMessage
  */
-var addMessage = function(contents) {
-  return _addMessage(contents);
+var addMessage = function(contents, options) {
+  // @TODO: Add settings objects details in doc
+  return _addMessage(contents, options);
 };
 
 /**

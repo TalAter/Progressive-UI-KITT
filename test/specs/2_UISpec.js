@@ -126,20 +126,79 @@
 
     });
 
-    xdescribe('ProgressiveKITT.addMessage(text, settings)', function() {
+    describe('ProgressiveKITT.addMessage(text, settings)', function() {
 
-      it('should accept a second parameter containing an object with settings', function () {
+      it('should accept an optional second parameter containing an object with settings', function () {
+        var messageText = 'Time for some thrilling heroics';
+        expect(function() {
+          ProgressiveKITT.addMessage(messageText);
+        }).not.toThrowError();
+        expect(function() {
+          ProgressiveKITT.addMessage(messageText, {});
+        }).not.toThrowError();
+      });
+
+      it('should throw an error if second parameter is not an object', function () {
+        var messageText = 'Time for some thrilling heroics';
+        expect(function() {
+          ProgressiveKITT.addMessage(messageText, messageText);
+        }).toThrowError();
+        expect(function() {
+          ProgressiveKITT.addMessage(messageText, 42);
+        }).toThrowError();
       });
 
       describe('ProgressiveKITT.addMessage(text, {hideAfter: integer})', function() {
 
         it('should hide message after the number of milliseconds passed as `hideAfter` in the settings object', function () {
+          expect(getMessages()).toHaveLength(0);
+          ProgressiveKITT.addMessage('Time for some thrilling heroics', { hideAfter: 5000});
+          ProgressiveKITT.addMessage('Time for some thrilling heroics', { hideAfter: 10000});
+          expect(getMessages()).toHaveLength(2);
+          expect(getLatestMessage()).toBeInDOM();
+          expect(getLatestMessage()).toBeVisible();
+          jasmine.clock().tick(6000);
+          expect(getMessages()).toHaveLength(1);
+          expect(getLatestMessage()).toBeInDOM();
+          expect(getLatestMessage()).toBeVisible();
+          jasmine.clock().tick(20000);
+          expect(getMessages()).toHaveLength(0);
         });
 
-        it('should hide message after the default 5000 milliseconds if not passed `hideAfter` in the settings object', function () {
+        it('should show message indefinitely if not passed `hideAfter` in the settings object', function () {
+          expect(getMessages()).toHaveLength(0);
+          ProgressiveKITT.addMessage('Time for some thrilling heroics');
+          expect(getMessages()).toHaveLength(1);
+          expect(getLatestMessage()).toBeInDOM();
+          expect(getLatestMessage()).toBeVisible();
+          jasmine.clock().tick(20000);
+          expect(getMessages()).toHaveLength(1);
+          expect(getLatestMessage()).toBeInDOM();
+          expect(getLatestMessage()).toBeVisible();
         });
 
-        it('should show message indefinitely if passed -1 or false `hideAfter` in the settings object', function () {
+        it('should show message indefinitely if a value that isn\'t an integer over 0 in `hideAfter` in the settings object', function () {
+          expect(getMessages()).toHaveLength(0);
+          ProgressiveKITT.addMessage('Time for some thrilling heroics', { hideAfter: 0 });
+          ProgressiveKITT.addMessage('Time for some thrilling heroics', { hideAfter: -1 });
+          ProgressiveKITT.addMessage('Time for some thrilling heroics', { hideAfter: false });
+          expect(getMessages()).toHaveLength(3);
+          expect(getLatestMessage()).toBeInDOM();
+          expect(getLatestMessage()).toBeVisible();
+          jasmine.clock().tick(20000);
+          expect(getMessages()).toHaveLength(3);
+          expect(getLatestMessage()).toBeInDOM();
+          expect(getLatestMessage()).toBeVisible();
+
+          it('should not throw an error if messages deleted before they timeout with hideAfter', function () {
+            var messageText = 'Time for some thrilling heroics';
+            expect(function() {
+              ProgressiveKITT.addMessage(messageText);
+              ProgressiveKITT.deleteMessages();
+              jasmine.clock().tick(20000);
+            }).not.toThrowError();
+          });
+
         });
 
       });
