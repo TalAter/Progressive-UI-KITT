@@ -52,6 +52,7 @@ module.exports = function(grunt) {
         },
         files: {
           'dist/themes/flat.css': 'themes/flat/flat.scss',
+          'dist/themes/flat-amethyst.css': 'themes/flat-amethyst/flat-amethyst.scss',
           'dist/themes/basic.css': 'themes/basic.scss'
         }
       }
