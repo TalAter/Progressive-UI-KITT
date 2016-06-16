@@ -31,7 +31,7 @@ module.exports = function(grunt) {
       },
     },
     watch: {
-      files: ['src/progressive-ui-kitt.js', 'test/specs/*Spec.js', 'test/helper_functions.js', '!**/node_modules/**'],
+      files: ['src/progressive-ui-kitt.js', 'test/specs/*Spec.js', 'themes/**/*', 'test/helper_functions.js', '!**/node_modules/**'],
       tasks: ['default']
     },
     connect: {
