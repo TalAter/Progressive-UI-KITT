@@ -37,11 +37,11 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          protocol: 'https',
+          protocol: 'http',
           port: 8443,
           hostname: '*',
           base: '.',
-          open: 'https://localhost:8443/demo'
+          open: 'http://localhost:8443/demo'
         }
       }
     },
