@@ -56,6 +56,7 @@ module.exports = function(grunt) {
           'dist/themes/flat-clouds.css': 'themes/flat-clouds/flat-clouds.scss',
           'dist/themes/flat-concrete.css': 'themes/flat-concrete/flat-concrete.scss',
           'dist/themes/flat-emerald.css': 'themes/flat-emerald/flat-emerald.scss',
+          'dist/themes/flat-lime.css': 'themes/flat-lime/flat-lime.scss',
           'dist/themes/flat-midnight-blue.css': 'themes/flat-midnight-blue/flat-midnight-blue.scss',
           'dist/themes/flat-orange.css': 'themes/flat-orange/flat-orange.scss',
           'dist/themes/flat-pomegranate.css': 'themes/flat-pomegranate/flat-pomegranate.scss',
