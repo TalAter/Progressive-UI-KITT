@@ -10,7 +10,7 @@
       expect(getWrappers()).toHaveLength(1);
       expect(getWrapper()).toBeInDOM();
       expect(getWrapper()).toBeVisible();
-      expect($(getWrapper()).attr('id')).toEqual('progressivekitt-ui');
+      expect($(getWrapper())).toHaveId('progressivekitt-ui');
     });
 
     it('should not attach a style sheet if non was defined', function () {
@@ -22,7 +22,7 @@
       ProgressiveKITT.setStylesheet('flat.css');
       ProgressiveKITT.vroom();
       expect(getStyleSheets()).toHaveLength(1);
-      expect(getStyleSheet().id).toEqual('progressivekitt-style-sheet');
+      expect(getStyleSheet()).toHaveId('progressivekitt-style-sheet');
       expect(getStyleSheet().rel).toEqual('stylesheet');
       expect(getStyleSheet().href).toContain('flat.css');
     });
@@ -104,7 +104,7 @@
 
     it('should create the message div with an id composed of `progressivekitt-message-` and the message id', function () {
       var messageId = ProgressiveKITT.addMessage('Time for some thrilling heroics');
-      expect($(getLatestMessage()).attr('id')).toEqual('progressivekitt-message-'+messageId);
+      expect($(getLatestMessage())).toHaveId('progressivekitt-message-'+messageId);
     });
 
     describe('ProgressiveKITT.addMessage(text)', function() {
