@@ -7,6 +7,7 @@ module.exports = function(grunt) {
     jshint: {
       all: [
         'src/progressive-ui-kitt.js',
+        'src/progressive-ui-kitt-sw-helper.js',
         'Gruntfile.js',
         'test/specs/*Spec.js'
       ],
@@ -29,9 +30,23 @@ module.exports = function(grunt) {
           }
         }
       },
+      standaloneSWHelper: {
+        src: [ 'src/progressive-ui-kitt-sw-helper.js' ],
+        dest: 'dist/progressive-ui-kitt-sw-helper.js',
+        options: {
+          plugin: [
+            [ "minifyify", { output: "dist/progressive-ui-kitt-sw-helper.js.map", map: 'progressive-ui-kitt-sw-helper.js.map' } ],
+            [ "browserify-header" ]
+          ],
+          browserifyOptions: {
+            standalone: 'ProgressiveKITT',
+            debug: true
+          }
+        }
+      }
     },
     watch: {
-      files: ['src/progressive-ui-kitt.js', 'test/specs/*Spec.js', 'themes/**/*', 'test/helper_functions.js', '!**/node_modules/**'],
+      files: ['src/progressive-ui-kitt.js', 'src/progressive-ui-kitt-sw-helper.js', 'test/specs/*Spec.js', 'themes/**/*', 'test/helper_functions.js', '!**/node_modules/**'],
       tasks: ['default']
     },
     connect: {
@@ -71,7 +86,8 @@ module.exports = function(grunt) {
     markdox: {
       dist: {
         files: [
-          {src: 'src/progressive-ui-kitt.js', dest: 'docs/README.md'}
+          {src: 'src/progressive-ui-kitt.js', dest: 'docs/README.md'},
+          {src: 'src/progressive-ui-kitt-sw-helper.js', dest: 'docs/README-sw-helper.md'}
         ]
       }
     },

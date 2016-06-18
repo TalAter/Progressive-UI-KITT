@@ -17,6 +17,8 @@ var _guiNodes;
 
 var _messages = [];
 
+var _listenersRegistered = false;
+
 // Checks if GUI was already created
 var _guiCreated = function () {
   return _guiNodes !== undefined;
@@ -97,6 +99,24 @@ var _addMessage = function(contents, options) {
   return messageId;
 };
 
+// A listener used to parse messages posted from the service worker
+var _messageListener = function(event) {
+  if (typeof event.data === 'object' && event.data.action === 'pkitt-message') {
+    _addMessage(event.data.msg);
+  }
+};
+
+// Register event listener for messages posted from the service worker
+var _registerListeners = function() {
+  if (_listenersRegistered) {
+    return;
+  }
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.addEventListener('message', _messageListener);
+    _listenersRegistered = true;
+  }
+};
+
 
 /**
  * Call after configuring KITT, to render its interface.
@@ -117,6 +137,8 @@ var vroom = function() {
  * @method render
  */
 var render = function() {
+  _registerListeners();
+
   if (!_guiCreated()) {
     _createGUI();
   }
@@ -156,7 +178,7 @@ var deleteMessages = function() {
 /**
  * Draws a new message to the GUI
  *
- * @param string contents the contents of the message (text or HTML)
+ * @param string contents The contents of the message (text or HTML)
  * @param Object options Options for this message
  * @method addMessage
  */

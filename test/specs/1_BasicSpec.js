@@ -40,10 +40,12 @@
     });
 
     it('should not expose private methods', function () {
-      expect(ProgressiveKITT._createGUI).toBe(undefined);
-      expect(ProgressiveKITT._updateStylesheet).toBe(undefined);
       expect(ProgressiveKITT._guiCreated).toBe(undefined);
+      expect(ProgressiveKITT._updateStylesheet).toBe(undefined);
+      expect(ProgressiveKITT._createGUI).toBe(undefined);
       expect(ProgressiveKITT._addMessage).toBe(undefined);
+      expect(ProgressiveKITT._messageListener).toBe(undefined);
+      expect(ProgressiveKITT._registerListeners).toBe(undefined);
     });
 
   });
