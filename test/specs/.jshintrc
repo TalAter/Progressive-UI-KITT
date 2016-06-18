@@ -33,6 +33,7 @@
     "jasmine":                false,
     "it":                     false,
     "xit":                    false,
+    "spyOn":                  false,
     "$":                      false,
     "ProgressiveKITT":        false,
     "getStyleSheets":         false,

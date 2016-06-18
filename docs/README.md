@@ -59,5 +59,23 @@ Call to show the GUI if it has been hidden with hide()
 
 Interface must have been previously rendered with render()
 
+## debug([newState=true])
+
+Turn output of debug messages to the console on or off.
+
+* Debug is off by default.
+* Calling with no arguments will turn debug on.
+
+Examples:
+````javascript
+ProgressiveKITT.debug();       // turns debug messages on
+ProgressiveKITT.debug(true);   // turns debug messages on
+ProgressiveKITT.debug(false);  // turns debug messages off
+````
+
+### Params:
+
+* **boolean** *[newState=true]* - Turn on/off debug messages
+
 <!-- End src/progressive-ui-kitt.js -->
 

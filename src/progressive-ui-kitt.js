@@ -12,12 +12,24 @@ https://github.com/TalAter/Progressive-UI-KITT
 
 var _stylesheet;
 var _stylesheetNode;
-
 var _guiNodes;
-
+var _debugState = false;
+var _debugStyle = 'font-weight: bold; color: #00f;';
 var _messages = [];
-
 var _listenersRegistered = false;
+
+// method for logging to the console if debug mode is on
+var _logMessage = function(text, extraParameters) {
+  if (!_debugState) {
+    return;
+  }
+  if (text.indexOf('%c') === -1 && !extraParameters) {
+    console.log(text);
+  } else {
+    extraParameters = extraParameters || _debugStyle;
+    console.log(text, extraParameters);
+  }
+};
 
 // Checks if GUI was already created
 var _guiCreated = function () {
@@ -61,7 +73,7 @@ var _addMessage = function(contents, options) {
   }
   options = options || {};
   if (typeof options !== 'object') {
-    throw new TypeError('Invalid options object');
+    _logMessage('Invalid options object');
   }
 
   var messageId = _messages.length+Date.now();
@@ -196,7 +208,7 @@ var addMessage = function(contents, options) {
  */
 var hide = function() {
   if (!_guiCreated()) {
-    throw new TypeError('cannot hide interface. Must be rendered first');
+    _logMessage('cannot hide interface. Must be rendered first');
   }
   _guiNodes.classList.add('progressivekitt-ui--hidden');
 };
@@ -210,9 +222,33 @@ var hide = function() {
  */
 var show = function() {
   if (!_guiCreated()) {
-    throw new TypeError('cannot show interface. Must be rendered first');
+    _logMessage('cannot show interface. Must be rendered first');
   }
   _guiNodes.classList.remove('progressivekitt-ui--hidden');
+};
+
+/**
+ * Turn output of debug messages to the console on or off.
+ *
+ * * Debug is off by default.
+ * * Calling with no arguments will turn debug on.
+ *
+ * Examples:
+ * ````javascript
+ * ProgressiveKITT.debug();       // turns debug messages on
+ * ProgressiveKITT.debug(true);   // turns debug messages on
+ * ProgressiveKITT.debug(false);  // turns debug messages off
+ * ````
+ *
+ * @param {boolean} [newState=true] - Turn on/off debug messages
+ * @method debug
+ */
+var debug = function(newState) {
+  if (arguments.length > 0) {
+    _debugState = !!newState;
+  } else {
+    _debugState = true;
+  }
 };
 
 
@@ -223,5 +259,6 @@ module.exports = {
   addMessage: addMessage,
   deleteMessages: deleteMessages,
   show: show,
-  hide: hide
+  hide: hide,
+  debug: debug
 };

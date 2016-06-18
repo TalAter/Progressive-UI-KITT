@@ -53,6 +53,8 @@
   describe('ProgressiveKITT.addMessage', function() {
 
     beforeEach(function() {
+      spyOn(console, 'log');
+      ProgressiveKITT.debug(false);
       ProgressiveKITT.vroom();
       jasmine.clock().install();
     });
@@ -130,22 +132,27 @@
 
       it('should accept an optional second parameter containing an object with settings', function () {
         var messageText = 'Time for some thrilling heroics';
-        expect(function() {
-          ProgressiveKITT.addMessage(messageText);
-        }).not.toThrowError();
-        expect(function() {
-          ProgressiveKITT.addMessage(messageText, {});
-        }).not.toThrowError();
+        ProgressiveKITT.debug(true);
+        ProgressiveKITT.addMessage(messageText);
+        ProgressiveKITT.addMessage(messageText, {});
+        expect(console.log).not.toHaveBeenCalled();
       });
 
-      it('should throw an error if second parameter is not an object', function () {
+      it('should log a message if second parameter is not an object and debug is on', function () {
         var messageText = 'Time for some thrilling heroics';
-        expect(function() {
-          ProgressiveKITT.addMessage(messageText, messageText);
-        }).toThrowError();
-        expect(function() {
-          ProgressiveKITT.addMessage(messageText, 42);
-        }).toThrowError();
+        ProgressiveKITT.debug(true);
+        ProgressiveKITT.addMessage(messageText, messageText);
+        expect(console.log).toHaveBeenCalledTimes(1);
+        ProgressiveKITT.addMessage(messageText, 42);
+        expect(console.log).toHaveBeenCalledTimes(2);
+      });
+
+      it('should not log a message if second parameter is not an object and debug is off', function () {
+        var messageText = 'Time for some thrilling heroics';
+        ProgressiveKITT.debug(false);
+        ProgressiveKITT.addMessage(messageText, messageText);
+        ProgressiveKITT.addMessage(messageText, 42);
+        expect(console.log).not.toHaveBeenCalled();
       });
 
       describe('ProgressiveKITT.addMessage(text, {hideAfter: integer})', function() {
@@ -276,7 +283,50 @@
   });
 
 
-  xdescribe('ProgressiveKITT.debug', function() {
+  describe('ProgressiveKITT.debug', function() {
+
+    var triggerDebugMessage = function() {
+      ProgressiveKITT.addMessage('Time for some thrilling heroics', 'I should be an object');
+    };
+
+    beforeEach(function(){
+      spyOn(console, 'log');
+    });
+
+    it('should be off by default', function() {
+      triggerDebugMessage();
+      expect(console.log).not.toHaveBeenCalled();
+    });
+
+    it('should turn on debug messages when called without a parameter', function() {
+      ProgressiveKITT.debug();
+      triggerDebugMessage();
+      expect(console.log).toHaveBeenCalled();
+    });
+
+    it('should turn off debug messages when called with a parameter that is false', function() {
+      ProgressiveKITT.debug(true);
+      ProgressiveKITT.debug(false);
+      triggerDebugMessage();
+      expect(console.log).not.toHaveBeenCalled();
+      ProgressiveKITT.debug(0);
+      triggerDebugMessage();
+      expect(console.log).not.toHaveBeenCalled();
+    });
+
+    it('should turn on debug messages when called with a parameter that is true', function() {
+      ProgressiveKITT.debug(false);
+      ProgressiveKITT.debug(1);
+      triggerDebugMessage();
+      expect(console.log).toHaveBeenCalledTimes(1);
+      ProgressiveKITT.debug(false);
+      ProgressiveKITT.debug(true);
+      triggerDebugMessage();
+      expect(console.log).toHaveBeenCalledTimes(2);
+    });
+
+
+
   });
 
 
