@@ -38,6 +38,14 @@ it will be updated)
 
 Deletes all existing messages from KITT and removes them from the DOM
 
+## deleteMessage(msgID)
+
+Deletes a single message from KITT and removes it from the DOM
+
+### Params:
+
+* *msgID* 
+
 ## addMessage(string, Object)
 
 Draws a new message to the GUI

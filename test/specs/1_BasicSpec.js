@@ -27,6 +27,10 @@
       expect(ProgressiveKITT.deleteMessages).toEqual(jasmine.any(Function));
     });
 
+    it('should contain deleteMessage method', function () {
+      expect(ProgressiveKITT.deleteMessage).toEqual(jasmine.any(Function));
+    });
+
     it('should contain show method', function () {
       expect(ProgressiveKITT.show).toEqual(jasmine.any(Function));
     });

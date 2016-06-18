@@ -246,6 +246,58 @@
 
   });
 
+  describe('ProgressiveKITT.deleteMessage', function() {
+
+    var msgID1;
+    var msgID2;
+    var msgID3;
+
+    beforeEach(function() {
+      spyOn(console, 'log');
+      ProgressiveKITT.debug(false);
+      ProgressiveKITT.vroom();
+      ProgressiveKITT.deleteMessages();
+      msgID1 = ProgressiveKITT.addMessage("Time for some thrilling heroics");
+      msgID2 = ProgressiveKITT.addMessage("Next time you want to stab me in the back, have the guts to do it to my face");
+      msgID3 = ProgressiveKITT.addMessage("Man walks down the street in a hat like that, you know he's not afraid of anything");
+    });
+
+    it('should return undefined', function () {
+      expect(ProgressiveKITT.deleteMessage()).toBe(undefined);
+    });
+
+    it('should delete from KITT and the DOM only the message with the id passed to it as the first argument', function () {
+      expect(getMessages()).toHaveLength(3);
+      ProgressiveKITT.deleteMessage(msgID1);
+      expect(getMessages()).toHaveLength(2);
+    });
+
+    it('should log to console if the given message id was not found and debug is on', function () {
+      ProgressiveKITT.debug(true);
+      expect(getMessages()).toHaveLength(3);
+      ProgressiveKITT.deleteMessage('Black market beagles');
+      expect(getMessages()).toHaveLength(3);
+      expect(console.log).toHaveBeenCalled();
+    });
+
+    it('should not log to console if the given message id was not found and debug is off', function () {
+      ProgressiveKITT.debug(false);
+      expect(getMessages()).toHaveLength(3);
+      ProgressiveKITT.deleteMessage('Black market beagles');
+      expect(getMessages()).toHaveLength(3);
+      expect(console.log).not.toHaveBeenCalled();
+    });
+
+    it('should not throw an error if there are no messages', function () {
+      ProgressiveKITT.deleteMessages();
+      expect(function() {
+        ProgressiveKITT.deleteMessage(msgID1);
+      }).not.toThrowError();
+      expect(getMessages()).toHaveLength(0);
+    });
+
+  });
+
 
   describe('ProgressiveKITT.hide', function() {
 

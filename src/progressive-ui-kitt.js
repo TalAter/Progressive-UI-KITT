@@ -129,6 +129,12 @@ var _registerListeners = function() {
   }
 };
 
+var _deleteMessageFromDOM = function(msgID) {
+  var node = document.getElementById('progressivekitt-message-'+msgID);
+  if (node && node.parentNode) {
+    node.parentNode.removeChild(node);
+  }
+};
 
 /**
  * Call after configuring KITT, to render its interface.
@@ -180,12 +186,31 @@ var setStylesheet = function(stylesheet) {
 var deleteMessages = function() {
   var message;
   while ((message = _messages.shift()) !== undefined) {
-    var node = document.getElementById('progressivekitt-message-'+message.id);
-    if (node && node.parentNode) {
-      node.parentNode.removeChild(node);
-    }
+    _deleteMessageFromDOM(message.id);
   }
 };
+
+/**
+ * Deletes a single message from KITT and removes it from the DOM
+ *
+ * @param msgID
+ * @method deleteMessage
+ */
+var deleteMessage = function(msgID) {
+  var messagesLength = _messages.length;
+  // Remove from array of messages
+  _messages = _messages.filter(function(message) {
+    return message.id !== msgID;
+  });
+  // If message id was not found, log a notice to console.
+  if (messagesLength === _messages.length) {
+    _logMessage('deleteMessage() did not find the message with the id', msgID);
+    return;
+  }
+  _deleteMessageFromDOM(msgID);
+};
+
+
 
 /**
  * Draws a new message to the GUI
@@ -253,12 +278,13 @@ var debug = function(newState) {
 
 
 module.exports = {
-  setStylesheet: setStylesheet,
-  vroom: vroom,
-  render: render,
-  addMessage: addMessage,
-  deleteMessages: deleteMessages,
-  show: show,
-  hide: hide,
-  debug: debug
+  setStylesheet:    setStylesheet,
+  vroom:            vroom,
+  render:           render,
+  addMessage:       addMessage,
+  deleteMessages:   deleteMessages,
+  deleteMessage:    deleteMessage,
+  show:             show,
+  hide:             hide,
+  debug:            debug
 };

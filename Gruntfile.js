@@ -118,7 +118,7 @@ module.exports = function(grunt) {
             thresholds: {
               statements: 60,
               branches: 40,
-              functions: 90,
+              functions: 80,
               lines: 90
             }
           }
