@@ -24,6 +24,10 @@ var getLatestMessage = function() {
   return getMessages().last();
 };
 
+var getLatestMessageButtons = function() {
+  return $('span.progressivekitt-button', getLatestMessage());
+};
+
 var simulateClick = function(element) {
   var event = document.createEvent("MouseEvents");
   event.initEvent("click", true, false);

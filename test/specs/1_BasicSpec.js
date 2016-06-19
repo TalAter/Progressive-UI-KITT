@@ -23,6 +23,14 @@
       expect(ProgressiveKITT.addMessage).toEqual(jasmine.any(Function));
     });
 
+    it('should contain addAlert method', function () {
+      expect(ProgressiveKITT.addAlert).toEqual(jasmine.any(Function));
+    });
+
+    xit('should contain addConfirm method', function () {
+      expect(ProgressiveKITT.addConfirm).toEqual(jasmine.any(Function));
+    });
+
     it('should contain deleteMessages method', function () {
       expect(ProgressiveKITT.deleteMessages).toEqual(jasmine.any(Function));
     });

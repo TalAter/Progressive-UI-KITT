@@ -25,6 +25,7 @@
   "white"     : false,
   "indent"    : 2,
   "globals":  {
+    "ProgressiveKITT":        false,
     "self":                   false
   }
 }

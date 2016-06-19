@@ -4,6 +4,7 @@
 
 $messageBackgroundColor: #323232 !default;
 $messageFontColor: #f1f1f1 !default;
+$buttonLabelColor: #eeff41 !default;
 $messageFontSize: 14px !default;
 $messageLineHeight: 18px !default;
 $messageFontFamily: 'Roboto', 'Noto', sans-serif !default;
@@ -43,4 +44,12 @@ $messageBorderRadius: 2px !default;
   opacity: 1;
   -webkit-transform: translateY(0);
   transform: translateY(0);
+}
+
+#progressivekitt-ui .progressivekitt-button {
+  color: $buttonLabelColor;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-left: 24px;
+  cursor: pointer;
 }

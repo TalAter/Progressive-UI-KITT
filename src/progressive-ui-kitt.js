@@ -64,7 +64,8 @@ var _createGUI = function() {
 };
 
 // Adds a new message and draws it
-var _addMessage = function(contents, options) {
+var _addMessage = function(contents, options, button1, button2) {
+  // @TODO: Keep message id in a data attribute
   if (!_guiCreated()) {
     return;
   }
@@ -77,6 +78,13 @@ var _addMessage = function(contents, options) {
   }
 
   var messageId = _messages.length+Date.now();
+
+  // Add buttons to contents if needed
+  [button1, button2].forEach(function(button, buttonId) {
+    if (button) {
+      contents += '<span class="progressivekitt-button" id="progressivekitt-button-'+buttonId+'-'+messageId+'">'+button.label+'</span>';
+    }
+  });
 
   var newMessageNode = document.createElement('div');
   newMessageNode.id = 'progressivekitt-message-'+messageId;
@@ -92,19 +100,26 @@ var _addMessage = function(contents, options) {
 
   _guiNodes.appendChild(newMessageNode);
 
+  // Add button actions
+  [button1, button2].forEach(function(button, buttonId) {
+    if (button) {
+      var buttonCallback = function() {
+        if (button.cb) {
+          button.cb.apply(button.context);
+        }
+        ProgressiveKITT.deleteMessage(messageId);
+      };
+      document.getElementById('progressivekitt-button-'+buttonId+'-'+messageId).addEventListener("click", buttonCallback, false);
+    }
+  });
+
   setTimeout(function() {
     newMessageNode.classList.add('progressivekitt-message--shown');
   }, 1);
 
   if (isFinite(options.hideAfter) && options.hideAfter > 0) {
     setTimeout(function() {
-      newMessageNode.classList.remove('progressivekitt-message--shown');
-      setTimeout(function() {
-        // @TODO: Refactor to _deleteMessage method
-        if (newMessageNode && newMessageNode.parentNode) {
-          newMessageNode.parentNode.removeChild(newMessageNode);
-        }
-      }, 1000);
+      ProgressiveKITT.deleteMessage(messageId);
     }, options.hideAfter);
   }
 
@@ -131,9 +146,12 @@ var _registerListeners = function() {
 
 var _deleteMessageFromDOM = function(msgID) {
   var node = document.getElementById('progressivekitt-message-'+msgID);
-  if (node && node.parentNode) {
-    node.parentNode.removeChild(node);
-  }
+  node.classList.remove('progressivekitt-message--shown');
+  setTimeout(function() {
+    if (node && node.parentNode) {
+      node.parentNode.removeChild(node);
+    }
+  }, 1000);
 };
 
 /**
@@ -213,7 +231,7 @@ var deleteMessage = function(msgID) {
 
 
 /**
- * Draws a new message to the GUI
+ * Draws a message to the GUI
  *
  * @param string contents The contents of the message (text or HTML)
  * @param Object options Options for this message
@@ -222,6 +240,34 @@ var deleteMessage = function(msgID) {
 var addMessage = function(contents, options) {
   // @TODO: Add settings objects details in doc
   return _addMessage(contents, options);
+};
+
+/**
+ * Draws a message to the GUI with a single button.
+ *
+ * Some examples:
+ * ````javascript
+ * // Create a simple alert with some text and the default button labeled ok which will dismiss the alert:
+ * ProgressiveKITT.addAlert('Time for some thrilling heroics');
+ *
+ * // Create an alert with a button that will log the function's context (i.e. this) to the console.
+ * // Context will be the ProgressiveKITT object by default:
+ * ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);});
+ * // Same as the previous example but the callback function will be run with the window as its context (ie this)
+ * ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);}, {}, window);
+ * ````
+ *
+ * @param string contents The contents of the message (text or HTML)
+ * @param string buttonLabel The text to appear on the button (defaults to `OK`)
+ * @param function buttonCallback A callback function to be called when button is pressed (defaults to dismissing message)
+ * @param Object options Options for this message
+ * @param Object context Optional context for the callback function. Defaults to ProgressiveKITT
+ * @method addAlert
+ */
+var addAlert = function(contents, buttonLabel, buttonCallback, options, context) {
+  // @TODO: Add settings objects details in doc
+  buttonLabel = buttonLabel || 'OK';
+  return _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context || this});
 };
 
 /**
@@ -282,6 +328,7 @@ module.exports = {
   vroom:            vroom,
   render:           render,
   addMessage:       addMessage,
+  addAlert:         addAlert,
   deleteMessages:   deleteMessages,
   deleteMessage:    deleteMessage,
   show:             show,

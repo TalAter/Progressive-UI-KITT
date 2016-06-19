@@ -48,12 +48,36 @@ Deletes a single message from KITT and removes it from the DOM
 
 ## addMessage(string, Object)
 
-Draws a new message to the GUI
+Draws a message to the GUI
 
 ### Params:
 
 * *string* contents The contents of the message (text or HTML)
 * *Object* options Options for this message
+
+## addAlert(string, string, function, Object, Object)
+
+Draws a message to the GUI with a single button.
+
+Some examples:
+````javascript
+// Create a simple alert with some text and the default button labeled ok which will dismiss the alert:
+ProgressiveKITT.addAlert('Time for some thrilling heroics');
+
+// Create an alert with a button that will log the function's context (i.e. this) to the console.
+// Context will be the ProgressiveKITT object by default:
+ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);});
+// Same as the previous example but the callback function will be run with the window as its context (ie this)
+ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);}, {}, window);
+````
+
+### Params:
+
+* *string* contents The contents of the message (text or HTML)
+* *string* buttonLabel The text to appear on the button (defaults to `OK`)
+* *function* buttonCallback A callback function to be called when button is pressed (defaults to dismissing message)
+* *Object* options Options for this message
+* *Object* context Optional context for the callback function. Defaults to ProgressiveKITT
 
 ## hide()
 

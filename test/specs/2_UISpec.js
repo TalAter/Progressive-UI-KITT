@@ -215,15 +215,92 @@
   });
 
 
+  describe('ProgressiveKITT.addAlert', function() {
+
+    beforeEach(function() {
+      ProgressiveKITT.debug(false);
+      ProgressiveKITT.vroom();
+      jasmine.clock().install();
+    });
+
+    afterEach(function() {
+      ProgressiveKITT.deleteMessages();
+      jasmine.clock().tick(200000);
+      jasmine.clock().uninstall();
+    });
+
+    it('should add a visible div to the DOM if passed a string as the first parameter', function () {
+      expect(getMessages()).toHaveLength(0);
+      ProgressiveKITT.addAlert('Time for some thrilling heroics');
+      expect(getMessages()).toHaveLength(1);
+      expect(getLatestMessage()).toBeInDOM();
+      expect(getLatestMessage()).toBeVisible();
+    });
+
+    it('should always contain 1 button in the div it renders', function () {
+      ProgressiveKITT.addAlert('Time for some thrilling heroics');
+      expect(getLatestMessageButtons()).toHaveLength(1);
+    });
+
+
+    describe('ProgressiveKITT.addAlert OK button', function() {
+
+      it('should always be a span with the classes progressivekitt-button', function () {
+        ProgressiveKITT.addAlert('Time for some thrilling heroics');
+        var button = $('span.progressivekitt-button', getLatestMessage());
+        expect(button).toHaveLength(1);
+      });
+
+      it('should create the button with an id composed of `progressivekitt-button-0-` and the message id', function () {
+        var messageId = ProgressiveKITT.addAlert('Time for some thrilling heroics');
+        expect($(getLatestMessageButtons()[0])).toHaveId('progressivekitt-button-0-'+messageId);
+      });
+
+      it('should be labeled `OK`, if no label was passed', function () {
+        ProgressiveKITT.addAlert('Time for some thrilling heroics');
+        expect(getLatestMessageButtons()[0].innerText).toEqual('OK');
+      });
+
+      it('should dismiss the alert message when clicked if no callback function was passed', function () {
+        ProgressiveKITT.addAlert('Time for some thrilling heroics');
+        simulateClick(getLatestMessageButtons()[0]);
+        expect(getMessages()).toHaveLength(1);
+        jasmine.clock().tick(2000);
+        expect(getMessages()).toHaveLength(0);
+      });
+
+      it('should call the callback function and dismiss the alert message when clicked', function () {
+        var spyOnButton = jasmine.createSpy();
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Spy', spyOnButton);
+        expect(spyOnButton).not.toHaveBeenCalled();
+        simulateClick(getLatestMessageButtons()[0]);
+        expect(spyOnButton).toHaveBeenCalledTimes(1);
+        jasmine.clock().tick(2000);
+        expect(getMessages()).toHaveLength(0);
+      });
+
+    });
+
+  });
+
+
   describe('ProgressiveKITT.deleteMessages', function() {
 
     beforeEach(function() {
+      ProgressiveKITT.debug(false);
+      jasmine.clock().install();
       ProgressiveKITT.vroom();
       ProgressiveKITT.addMessage("Time for some thrilling heroics");
       ProgressiveKITT.addMessage("Next time you want to stab me in the back, have the guts to do it to my face");
       ProgressiveKITT.addMessage("Man walks down the street in a hat like that, you know he's not afraid of anything");
     });
-    
+
+    afterEach(function() {
+      ProgressiveKITT.deleteMessages();
+      jasmine.clock().tick(200000);
+      jasmine.clock().uninstall();
+    });
+
     it('should return undefined', function () {
       expect(ProgressiveKITT.deleteMessages()).toBe(undefined);
     });
@@ -231,16 +308,19 @@
     it('should delete all existing messages from the DOM', function () {
       expect(getMessages()).toHaveLength(3);
       ProgressiveKITT.deleteMessages();
+      jasmine.clock().tick(2000);
       expect(getMessages()).toHaveLength(0);
     });
 
     it('should not throw an error if there are no messages', function () {
       expect(getMessages()).toHaveLength(3);
       ProgressiveKITT.deleteMessages();
+      jasmine.clock().tick(2000);
       expect(getMessages()).toHaveLength(0);
       expect(function() {
         ProgressiveKITT.deleteMessages();
       }).not.toThrowError();
+      jasmine.clock().tick(2000);
       expect(getMessages()).toHaveLength(0);
     });
 
@@ -253,6 +333,8 @@
     var msgID3;
 
     beforeEach(function() {
+      ProgressiveKITT.debug(false);
+      jasmine.clock().install();
       spyOn(console, 'log');
       ProgressiveKITT.debug(false);
       ProgressiveKITT.vroom();
@@ -262,6 +344,12 @@
       msgID3 = ProgressiveKITT.addMessage("Man walks down the street in a hat like that, you know he's not afraid of anything");
     });
 
+    afterEach(function() {
+      ProgressiveKITT.deleteMessages();
+      jasmine.clock().tick(200000);
+      jasmine.clock().uninstall();
+    });
+
     it('should return undefined', function () {
       expect(ProgressiveKITT.deleteMessage()).toBe(undefined);
     });
@@ -269,6 +357,7 @@
     it('should delete from KITT and the DOM only the message with the id passed to it as the first argument', function () {
       expect(getMessages()).toHaveLength(3);
       ProgressiveKITT.deleteMessage(msgID1);
+      jasmine.clock().tick(2000);
       expect(getMessages()).toHaveLength(2);
     });
 
@@ -276,6 +365,7 @@
       ProgressiveKITT.debug(true);
       expect(getMessages()).toHaveLength(3);
       ProgressiveKITT.deleteMessage('Black market beagles');
+      jasmine.clock().tick(2000);
       expect(getMessages()).toHaveLength(3);
       expect(console.log).toHaveBeenCalled();
     });
@@ -284,6 +374,7 @@
       ProgressiveKITT.debug(false);
       expect(getMessages()).toHaveLength(3);
       ProgressiveKITT.deleteMessage('Black market beagles');
+      jasmine.clock().tick(2000);
       expect(getMessages()).toHaveLength(3);
       expect(console.log).not.toHaveBeenCalled();
     });
@@ -293,6 +384,7 @@
       expect(function() {
         ProgressiveKITT.deleteMessage(msgID1);
       }).not.toThrowError();
+      jasmine.clock().tick(2000);
       expect(getMessages()).toHaveLength(0);
     });
 
