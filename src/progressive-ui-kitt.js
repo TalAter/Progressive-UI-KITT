@@ -128,8 +128,20 @@ var _addMessage = function(contents, options, button1, button2) {
 
 // A listener used to parse messages posted from the service worker
 var _messageListener = function(event) {
-  if (typeof event.data === 'object' && event.data.action === 'pkitt-message') {
-    _addMessage(event.data.msg);
+  var data = event.data;
+  if (typeof event.data === 'object') {
+    var payload = event.data.payload;
+    switch (data.action) {
+      case 'pkitt-message':
+        ProgressiveKITT.addMessage(payload.contents, payload.options);
+        break;
+      case 'pkitt-alert':
+        ProgressiveKITT.addAlert(payload.contents, payload.buttonLabel, payload.buttonCallback, payload.options, payload.context);
+        break;
+      case 'pkitt-confirm':
+        ProgressiveKITT.addConfirm(payload.contents, payload.button1Label, payload.button1Callback, payload.button2Label, payload.button2Callback, payload.options, payload.context1, payload.context2);
+        break;
+    }
   }
 };
 
