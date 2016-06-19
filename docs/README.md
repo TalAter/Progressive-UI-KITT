@@ -58,10 +58,11 @@ Draws a message to the GUI
 ## addAlert(string, string, function, Object, Object)
 
 Draws a message to the GUI with a single button.
+Defaults: Button is labeled `OK` and dismisses the message.
 
 Some examples:
 ````javascript
-// Create a simple alert with some text and the default button labeled ok which will dismiss the alert:
+// Create a simple alert with some text and the default button labeled `OK` which will dismiss the alert:
 ProgressiveKITT.addAlert('Time for some thrilling heroics');
 
 // Create an alert with a button that will log the function's context (i.e. this) to the console.
@@ -78,6 +79,34 @@ ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {c
 * *function* buttonCallback A callback function to be called when button is pressed (defaults to dismissing message)
 * *Object* options Options for this message
 * *Object* context Optional context for the callback function. Defaults to ProgressiveKITT
+
+## addConfirm(string, string, function, string, function, Object, Object, Object)
+
+Draws a message to the GUI with two buttons.
+Defaults: Buttons are labeled `OK` and `Cancel` and both dismiss the message.
+
+Some examples:
+````javascript
+// Create a simple confirmation with some text and two default button labeled `OK` and `cancel` which will dismiss the alert:
+ProgressiveKITT.addConfirm('You know what the chain of command is?');
+
+// Create a confirmation with a yes and no buttons that will log each function's context (i.e. this) to the console.
+// Context will be the ProgressiveKITT object by default:
+ProgressiveKITT.addConfirm('Ready?', 'Yes', function() {console.log('Yes!');}, 'No',  function() {console.log('No!');});
+// Same as the previous example but the callback functions will be run with the window as its context (ie this)
+ProgressiveKITT.addConfirm('Ready?', 'Yes', function() {console.log('Yes!');}, 'No',  function() {console.log('No!');}, {}, window, window);
+````
+
+### Params:
+
+* *string* contents The contents of the message (text or HTML)
+* *string* button1Label The text to appear on the 1st button (defaults to `OK`)
+* *function* button1Callback A callback function to be called when 1st button is pressed (defaults to dismissing message)
+* *string* button2Label The text to appear on the 2nd button (defaults to `Cancel`)
+* *function* button2Callback A callback function to be called when button is pressed (defaults to dismissing message)
+* *Object* options Options for this message
+* *Object* context1 Optional context for the 1st callback function. Defaults to ProgressiveKITT
+* *Object* context2 Optional context for the 2nd callback function. Defaults to ProgressiveKITT
 
 ## hide()
 

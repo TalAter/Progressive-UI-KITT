@@ -27,7 +27,7 @@
       expect(ProgressiveKITT.addAlert).toEqual(jasmine.any(Function));
     });
 
-    xit('should contain addConfirm method', function () {
+    it('should contain addConfirm method', function () {
       expect(ProgressiveKITT.addConfirm).toEqual(jasmine.any(Function));
     });
 

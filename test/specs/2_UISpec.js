@@ -283,6 +283,115 @@
   });
 
 
+  describe('ProgressiveKITT.addConfirm', function() {
+
+    beforeEach(function() {
+      ProgressiveKITT.debug(false);
+      ProgressiveKITT.vroom();
+      jasmine.clock().install();
+    });
+
+    afterEach(function() {
+      ProgressiveKITT.deleteMessages();
+      jasmine.clock().tick(200000);
+      jasmine.clock().uninstall();
+    });
+
+    it('should add a visible div to the DOM if passed a string as the first parameter', function () {
+      expect(getMessages()).toHaveLength(0);
+      ProgressiveKITT.addConfirm('You know what the chain of command is?');
+      expect(getMessages()).toHaveLength(1);
+      expect(getLatestMessage()).toBeInDOM();
+      expect(getLatestMessage()).toBeVisible();
+    });
+
+    it('should always contain 2 buttons in the div it renders', function () {
+      ProgressiveKITT.addConfirm('You know what the chain of command is?');
+      expect(getLatestMessageButtons()).toHaveLength(2);
+    });
+
+    describe('ProgressiveKITT.addConfirm OK button', function() {
+
+      it('should always be a span with the classes progressivekitt-button', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        var button = $('span.progressivekitt-button', getLatestMessage());
+        expect(button).toHaveLength(2);
+      });
+
+      it('should create the button with an id composed of `progressivekitt-button-0-` and the message id', function () {
+        var messageId = ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        expect($(getLatestMessageButtons()[0])).toHaveId('progressivekitt-button-0-'+messageId);
+      });
+
+      it('should be labeled `OK`, if no label was passed', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        expect(getLatestMessageButtons()[0].innerText).toEqual('OK');
+      });
+
+      it('should dismiss the alert message when clicked if no callback function was passed', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        simulateClick(getLatestMessageButtons()[0]);
+        expect(getMessages()).toHaveLength(1);
+        jasmine.clock().tick(2000);
+        expect(getMessages()).toHaveLength(0);
+      });
+
+      it('should call the callback function and dismiss the alert message when clicked', function () {
+        var spyOnButton = jasmine.createSpy();
+        ProgressiveKITT.addConfirm('You know what the chain of command is?', 'Spy', spyOnButton);
+        expect(spyOnButton).not.toHaveBeenCalled();
+        simulateClick(getLatestMessageButtons()[0]);
+        expect(spyOnButton).toHaveBeenCalledTimes(1);
+        jasmine.clock().tick(2000);
+        expect(getMessages()).toHaveLength(0);
+      });
+
+    });
+
+    describe('ProgressiveKITT.addConfirm Cancel button', function() {
+
+      it('should always be a span with the classes progressivekitt-button', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        var button = $('span.progressivekitt-button', getLatestMessage());
+        expect(button).toHaveLength(2);
+      });
+
+      it('should create the button with an id composed of `progressivekitt-button-1-` and the message id', function () {
+        var messageId = ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        expect($(getLatestMessageButtons()[1])).toHaveId('progressivekitt-button-1-'+messageId);
+      });
+
+      it('should be labeled `Cancel`, if no label was passed', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        expect(getLatestMessageButtons()[1].innerText).toEqual('Cancel');
+      });
+
+      it('should dismiss the alert message when clicked if no callback function was passed', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?');
+        simulateClick(getLatestMessageButtons()[1]);
+        expect(getMessages()).toHaveLength(1);
+        jasmine.clock().tick(2000);
+        expect(getMessages()).toHaveLength(0);
+      });
+
+      it('should call the callback function and dismiss the alert message when clicked', function () {
+        var spyOnButton1 = jasmine.createSpy();
+        var spyOnButton2 = jasmine.createSpy();
+        ProgressiveKITT.addConfirm('You know what the chain of command is?', 'Yes', spyOnButton1, 'No', spyOnButton2);
+        expect(spyOnButton1).not.toHaveBeenCalled();
+        expect(spyOnButton2).not.toHaveBeenCalled();
+        simulateClick(getLatestMessageButtons()[1]);
+        expect(spyOnButton1).not.toHaveBeenCalled();
+        expect(spyOnButton2).toHaveBeenCalledTimes(1);
+        jasmine.clock().tick(2000);
+        expect(getMessages()).toHaveLength(0);
+      });
+
+    });
+
+  });
+
+
   describe('ProgressiveKITT.deleteMessages', function() {
 
     beforeEach(function() {
