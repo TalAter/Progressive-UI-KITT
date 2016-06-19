@@ -242,7 +242,6 @@
       expect(getLatestMessageButtons()).toHaveLength(1);
     });
 
-
     describe('ProgressiveKITT.addAlert OK button', function() {
 
       it('should always be a span with the classes progressivekitt-button', function () {
@@ -325,6 +324,7 @@
     });
 
   });
+
 
   describe('ProgressiveKITT.deleteMessage', function() {
 
@@ -468,8 +468,6 @@
       triggerDebugMessage();
       expect(console.log).toHaveBeenCalledTimes(2);
     });
-
-
 
   });
 
