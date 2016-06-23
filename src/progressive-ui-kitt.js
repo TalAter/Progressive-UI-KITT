@@ -113,9 +113,10 @@ var _addMessage = function(contents, options, button1, button2) {
     }
   });
 
+  //Delay showing of the message by 20 ms. Helps make sure CSS animations happen consistently.
   setTimeout(() => {
     newMessageNode.classList.add('progressivekitt-message--shown');
-  }, 1);
+  }, 20);
 
   if (isFinite(options.hideAfter) && options.hideAfter > 0) {
     setTimeout(() => {

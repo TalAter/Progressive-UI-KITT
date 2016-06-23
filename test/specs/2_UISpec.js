@@ -102,10 +102,10 @@
       expect(getLatestMessage()).toHaveClass('progressivekitt-message');
     });
 
-    it('should add the class `progressivekitt-message--shown` to the message div 1 ms after it is created', function () {
+    it('should add the class `progressivekitt-message--shown` to the message div 20 ms after it is created', function () {
       ProgressiveKITT.addMessage('Time for some thrilling heroics');
       expect(getLatestMessage()).not.toHaveClass('progressivekitt-message--shown');
-      jasmine.clock().tick(1);
+      jasmine.clock().tick(20);
       expect(getLatestMessage()).toHaveClass('progressivekitt-message--shown');
     });
 
