@@ -62,7 +62,7 @@ var _createGUI = function() {
 };
 
 // Adds a new message and draws it
-var _addMessage = function(contents, options, button1, button2) {
+var _addMessage = function(contents, options, ...buttons) {
   // @TODO: Keep message id in a data attribute
   if (!_guiCreated()) {
     return;
@@ -78,7 +78,7 @@ var _addMessage = function(contents, options, button1, button2) {
   var messageId = _messages.length+Date.now();
 
   // Add buttons to contents if needed
-  [button1, button2].forEach((button, buttonId) => {
+  buttons.forEach((button, buttonId) => {
     if (button) {
       contents += `<span class="progressivekitt-button" id="progressivekitt-button-${buttonId}-${messageId}">${button.label}</span>`;
     }
@@ -99,7 +99,7 @@ var _addMessage = function(contents, options, button1, button2) {
   _guiNodes.appendChild(newMessageNode);
 
   // Add button actions
-  [button1, button2].forEach((button, buttonId) => {
+  buttons.forEach((button, buttonId) => {
     if (button) {
       var buttonCallback = function() {
         if (button.cb) {
