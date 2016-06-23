@@ -75,7 +75,7 @@ var _addMessage = function(contents, options, ...buttons) {
     _logMessage('Invalid options object');
   }
 
-  var messageId = _messages.length+Date.now();
+  const messageId = _messages.length+Date.now();
 
   // Add buttons to contents if needed
   buttons.forEach((button, buttonId) => {
@@ -225,13 +225,13 @@ var deleteMessages = function() {
  * @method deleteMessage
  */
 var deleteMessage = function(msgID) {
-  var messagesLength = _messages.length;
+  const originalMessageLength = _messages.length;
   // Remove from array of messages
   _messages = _messages.filter((message) => {
     return message.id !== msgID;
   });
   // If message id was not found, log a notice to console.
-  if (messagesLength === _messages.length) {
+  if (originalMessageLength === _messages.length) {
     _logMessage('deleteMessage() did not find the message with the id', msgID);
     return;
   }
