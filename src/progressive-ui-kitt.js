@@ -82,12 +82,12 @@ var _addMessage = function(contents, options, button1, button2) {
   // Add buttons to contents if needed
   [button1, button2].forEach((button, buttonId) => {
     if (button) {
-      contents += '<span class="progressivekitt-button" id="progressivekitt-button-'+buttonId+'-'+messageId+'">'+button.label+'</span>';
+      contents += `<span class="progressivekitt-button" id="progressivekitt-button-${buttonId}-${messageId}">${button.label}</span>`;
     }
   });
 
   var newMessageNode = document.createElement('div');
-  newMessageNode.id = 'progressivekitt-message-'+messageId;
+  newMessageNode.id = `progressivekitt-message-${messageId}`;
   newMessageNode.innerHTML = contents;
   newMessageNode.classList.add('progressivekitt-message');
 
@@ -109,7 +109,7 @@ var _addMessage = function(contents, options, button1, button2) {
         }
         ProgressiveKITT.deleteMessage(messageId);
       };
-      document.getElementById('progressivekitt-button-'+buttonId+'-'+messageId).addEventListener("click", buttonCallback, false);
+      document.getElementById(`progressivekitt-button-${buttonId}-${messageId}`).addEventListener("click", buttonCallback, false);
     }
   });
 
@@ -158,7 +158,7 @@ var _registerListeners = function() {
 };
 
 var _deleteMessageFromDOM = function(msgID) {
-  var node = document.getElementById('progressivekitt-message-'+msgID);
+  var node = document.getElementById(`progressivekitt-message-${msgID}`);
   node.classList.remove('progressivekitt-message--shown');
   setTimeout(() => {
     if (node && node.parentNode) {

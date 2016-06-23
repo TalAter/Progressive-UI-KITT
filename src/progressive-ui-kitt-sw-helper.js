@@ -14,7 +14,7 @@
 var _postMessageToAllClients = function(payload, type) {
   self.clients.matchAll({ includeUncontrolled: true }).then(function(clients) {
     clients.forEach(function (client) {
-      client.postMessage({action: 'pkitt-'+type, payload: payload});
+      client.postMessage({action: `pkitt-${type}`, payload: payload});
     });
   });
 };
