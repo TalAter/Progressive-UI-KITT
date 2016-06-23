@@ -20,6 +20,9 @@ module.exports = function(grunt) {
         src: [ 'src/progressive-ui-kitt.js' ],
         dest: 'dist/progressive-ui-kitt.js',
         options: {
+          transform: [
+            [ "babelify", {presets: ["es2015"]} ]
+          ],
           plugin: [
             [ "minifyify", { output: "dist/progressive-ui-kitt.js.map", map: 'progressive-ui-kitt.js.map' } ],
             [ "browserify-header" ]
