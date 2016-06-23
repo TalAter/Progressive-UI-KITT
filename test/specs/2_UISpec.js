@@ -102,6 +102,13 @@
       expect(getLatestMessage()).toHaveClass('progressivekitt-message');
     });
 
+    it('should add the class `progressivekitt-message--shown` to the message div 1 ms after it is created', function () {
+      ProgressiveKITT.addMessage('Time for some thrilling heroics');
+      expect(getLatestMessage()).not.toHaveClass('progressivekitt-message--shown');
+      jasmine.clock().tick(1);
+      expect(getLatestMessage()).toHaveClass('progressivekitt-message--shown');
+    });
+
     it('should create the message div with an id composed of `progressivekitt-message-` and the message id', function () {
       var messageId = ProgressiveKITT.addMessage('Time for some thrilling heroics');
       expect($(getLatestMessage())).toHaveId('progressivekitt-message-'+messageId);
