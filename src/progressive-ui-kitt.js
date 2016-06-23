@@ -128,10 +128,9 @@ var _addMessage = function(contents, options, button1, button2) {
 };
 
 // A listener used to parse messages posted from the service worker
-var _messageListener = function(event) {
-  var data = event.data;
-  if (typeof event.data === 'object') {
-    var payload = event.data.payload;
+var _messageListener = function({data: data}) {
+  if (typeof data === 'object') {
+    var payload = data.payload;
     switch (data.action) {
       case 'pkitt-message':
         ProgressiveKITT.addMessage(payload.contents, payload.options);
