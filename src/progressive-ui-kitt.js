@@ -80,7 +80,7 @@ var _addMessage = function(contents, options, button1, button2) {
   var messageId = _messages.length+Date.now();
 
   // Add buttons to contents if needed
-  [button1, button2].forEach(function(button, buttonId) {
+  [button1, button2].forEach((button, buttonId) => {
     if (button) {
       contents += '<span class="progressivekitt-button" id="progressivekitt-button-'+buttonId+'-'+messageId+'">'+button.label+'</span>';
     }
@@ -101,7 +101,7 @@ var _addMessage = function(contents, options, button1, button2) {
   _guiNodes.appendChild(newMessageNode);
 
   // Add button actions
-  [button1, button2].forEach(function(button, buttonId) {
+  [button1, button2].forEach((button, buttonId) => {
     if (button) {
       var buttonCallback = function() {
         if (button.cb) {
@@ -113,12 +113,12 @@ var _addMessage = function(contents, options, button1, button2) {
     }
   });
 
-  setTimeout(function() {
+  setTimeout(() => {
     newMessageNode.classList.add('progressivekitt-message--shown');
   }, 1);
 
   if (isFinite(options.hideAfter) && options.hideAfter > 0) {
-    setTimeout(function() {
+    setTimeout(() => {
       ProgressiveKITT.deleteMessage(messageId);
     }, options.hideAfter);
   }
@@ -159,7 +159,7 @@ var _registerListeners = function() {
 var _deleteMessageFromDOM = function(msgID) {
   var node = document.getElementById('progressivekitt-message-'+msgID);
   node.classList.remove('progressivekitt-message--shown');
-  setTimeout(function() {
+  setTimeout(() => {
     if (node && node.parentNode) {
       node.parentNode.removeChild(node);
     }
@@ -229,7 +229,7 @@ var deleteMessages = function() {
 var deleteMessage = function(msgID) {
   var messagesLength = _messages.length;
   // Remove from array of messages
-  _messages = _messages.filter(function(message) {
+  _messages = _messages.filter((message) => {
     return message.id !== msgID;
   });
   // If message id was not found, log a notice to console.
