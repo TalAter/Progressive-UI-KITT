@@ -14,19 +14,17 @@ var _stylesheet;
 var _stylesheetNode;
 var _guiNodes;
 var _debugState = false;
-var _debugStyle = 'font-weight: bold; color: #00f;';
 var _messages = [];
 var _listenersRegistered = false;
 
 // method for logging to the console if debug mode is on
-var _logMessage = function(text, extraParameters) {
+var _logMessage = function(text, extraParameters = 'font-weight: bold; color: #00f;') {
   if (!_debugState) {
     return;
   }
   if (text.indexOf('%c') === -1 && !extraParameters) {
     console.log(text);
   } else {
-    extraParameters = extraParameters || _debugStyle;
     console.log(text, extraParameters);
   }
 };
@@ -277,10 +275,9 @@ var addMessage = function(contents, options) {
  * @param Object context Optional context for the callback function. Defaults to ProgressiveKITT
  * @method addAlert
  */
-var addAlert = function(contents, buttonLabel, buttonCallback, options, context) {
+var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined, options = undefined, context = this) {
   // @TODO: Add settings objects details in doc
-  buttonLabel = buttonLabel || 'OK';
-  return _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context || this});
+  return _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context});
 };
 
 /**
@@ -309,11 +306,9 @@ var addAlert = function(contents, buttonLabel, buttonCallback, options, context)
  * @param Object context2 Optional context for the 2nd callback function. Defaults to ProgressiveKITT
  * @method addConfirm
  */
-var addConfirm = function(contents, button1Label, button1Callback, button2Label, button2Callback, options, context1, context2) {
+var addConfirm = function(contents, button1Label = 'OK', button1Callback = undefined, button2Label = 'Cancel', button2Callback = undefined, options = undefined, context1 = this, context2 = this) {
   // @TODO: Add settings objects details in doc
-  button1Label = button1Label || 'OK';
-  button2Label = button2Label || 'Cancel';
-  return _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1 || this}, {label: button2Label, cb: button2Callback, context: context2 || this});
+  return _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1}, {label: button2Label, cb: button2Callback, context: context2});
 };
 
 /**
@@ -360,12 +355,8 @@ var show = function() {
  * @param {boolean} [newState=true] - Turn on/off debug messages
  * @method debug
  */
-var debug = function(newState) {
-  if (arguments.length > 0) {
-    _debugState = !!newState;
-  } else {
-    _debugState = true;
-  }
+var debug = function(newState = true) {
+  _debugState = !!newState;
 };
 
 
