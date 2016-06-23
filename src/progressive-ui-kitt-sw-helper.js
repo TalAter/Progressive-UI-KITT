@@ -12,8 +12,8 @@
 
 // Method used to post messages to all of a service worker's clients, including uncontrolled ones.
 var _postMessageToAllClients = function(payload, type) {
-  self.clients.matchAll({ includeUncontrolled: true }).then(function(clients) {
-    clients.forEach(function (client) {
+  self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
+    clients.forEach((client) => {
       client.postMessage({action: `pkitt-${type}`, payload: payload});
     });
   });
