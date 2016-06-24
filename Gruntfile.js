@@ -92,8 +92,8 @@ module.exports = function(grunt) {
     markdox: {
       dist: {
         files: [
-          {src: 'src/progressive-ui-kitt.js', dest: 'docs/README.md'},
-          {src: 'src/progressive-ui-kitt-sw-helper.js', dest: 'docs/README-sw-helper.md'}
+          {src: 'src/progressive-ui-kitt.js', dest: 'docs/API.md'},
+          {src: 'src/progressive-ui-kitt-sw-helper.js', dest: 'docs/API-sw-helper.md'}
         ]
       }
     },
