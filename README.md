@@ -1,8 +1,24 @@
 # Progressive UI KITT
 <img src="https://raw.githubusercontent.com/TalAter/Progressive-UI-KITT/master/demo/README-logo.png" align="right" />
-> A flexible GUI for progressive web apps
+> KITT makes it easy to add a GUI to progressive web apps
 
-Progressive UI KITT makes it easy to add a GUI to progressive web apps.
+Progressive web apps are a fundamental change in how we see the web. In a way, they defy our expectations of what a website is.
+
+When a user visits a website, she does not expect it to work if she is offline. Progressive web apps over-deliver on that expectation. A user visiting a site to check the weather, expects to have to come back every day to check for updates. He does not expect the weather to come to him with push notifications. Progressive web apps over deliver here too. On the other hand, if a user is visiting a progressive web app without noticing that his connection is flaky, he may not realize that the content he is seeing may be a few hours (or even days) old. In this case, progressive web apps under deliver on what the user expects of the site he is looking at.
+
+Educating users about what the modern web can do is a process that will take years. But communicating to the user what your progressive web app can do, is within your power.
+
+## What is Progressive UI KITT
+
+Progressive UI KITT provides two tools to help you communicate:
+
+1. A collection of patterns for how to best communicate PWA concepts to your users.
+
+2. A tool that allows you to implement those patterns easily.
+
+You can choose to use just one or both of them. You can consult the pattern library, but implement them on your own. You can use the tools that KITT provides you to communicate with your users, but decide on your own language, messaging and patterns. Or, you can use KITT as a whole system to easily implement these common patterns for communicating with your users through common messages (e.g. "Caching complete! Future visits will work offline" or "Offline. Changes you make will be saved for later").
+
+KITT is lightweight and has no dependencies. It is easily customizable, and comes with many premade themes to fit any design (as well as instructions for how to create your own).
 
 ## Progressive UI KITT is currently under heavy construction!
 
