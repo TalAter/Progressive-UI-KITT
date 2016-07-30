@@ -12,7 +12,7 @@ Educating users about what the modern web can do is a process that will take yea
 
 Progressive UI KITT provides two tools to help you communicate:
 
-1. A collection of patterns for how to best communicate PWA concepts to your users.
+1. A collection of common patterns for communicating PWA concepts to your users.
 
 2. A tool that allows you to implement those patterns easily.
 
