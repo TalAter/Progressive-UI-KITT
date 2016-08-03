@@ -25,6 +25,7 @@
     "url": "https://github.com/TalAter/Progressive-UI-KITT/issues"
   },
   "scripts": {
+    "start": "grunt serve",
     "test": "grunt test"
   },
   "devDependencies": {
