@@ -138,5 +138,25 @@ ProgressiveKITT.debug(false);  // turns debug messages off
 
 * **boolean** *[newState=true]* - Turn on/off debug messages
 
+## addCallback(type, callback, [context])
+
+Add a callback function to be called in case one of the following events happens:
+
+* `show-message` - Fired when a message is shown
+
+#### Examples:
+````javascript
+ProgressiveKITT.addCallback('show-message', function() {
+  console.log('A message was just shown');;
+});
+
+````
+
+### Params:
+
+* **String** *type* - Name of event that will trigger this callback
+* **Function** *callback* - The function to call when event is triggered
+* **Object** *[context]* - Optional context for the callback function to be run in
+
 <!-- End src/progressive-ui-kitt.js -->
 

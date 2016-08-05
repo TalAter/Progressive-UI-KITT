@@ -51,6 +51,10 @@
       expect(ProgressiveKITT.debug).toEqual(jasmine.any(Function));
     });
 
+    it('should contain addCallback method', function () {
+      expect(ProgressiveKITT.addCallback).toEqual(jasmine.any(Function));
+    });
+
     it('should not expose private methods', function () {
       expect(ProgressiveKITT._guiCreated).toBe(undefined);
       expect(ProgressiveKITT._logMessage).toBe(undefined);
@@ -59,6 +63,7 @@
       expect(ProgressiveKITT._addMessage).toBe(undefined);
       expect(ProgressiveKITT._messageListener).toBe(undefined);
       expect(ProgressiveKITT._registerListeners).toBe(undefined);
+      expect(ProgressiveKITT._invokeCallbacks).toBe(undefined);
     });
 
   });

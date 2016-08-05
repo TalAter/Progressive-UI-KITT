@@ -16,6 +16,8 @@ var _guiNodes;
 var _debugState = false;
 var _messages = [];
 var _listenersRegistered = false;
+var _callbacks = { "show-message": [] };
+
 
 // method for logging to the console if debug mode is on
 var _logMessage = function(text, extraParameters = 'font-weight: bold; color: #00f;') {
@@ -164,6 +166,15 @@ var _deleteMessageFromDOM = function(msgID) {
   }, 1000);
 };
 
+// This method receives an array of callbacks to iterate over, and invokes each of them
+var _invokeCallbacks = function(callbackType, ...args) {
+  _callbacks[callbackType].forEach(function(callback) {
+    callback.callback.apply(callback.context, args);
+  });
+};
+
+
+
 /**
  * Call after configuring KITT, to render its interface.
  *
@@ -249,6 +260,7 @@ var deleteMessage = function(msgID) {
  */
 var addMessage = function(contents, options) {
   // @TODO: Add settings objects details in doc
+  _invokeCallbacks('show-message');
   return _addMessage(contents, options);
 };
 
@@ -359,6 +371,32 @@ var debug = function(newState = true) {
   _debugState = !!newState;
 };
 
+/**
+ * Add a callback function to be called in case one of the following events happens:
+ *
+ * * `show-message` - Fired when a message is shown
+ *
+ * #### Examples:
+ * ````javascript
+ * ProgressiveKITT.addCallback('show-message', function() {
+ *   console.log('A message was just shown');;
+ * });
+ *
+ * ````
+ * @param {String} type - Name of event that will trigger this callback
+ * @param {Function} callback - The function to call when event is triggered
+ * @param {Object} [context] - Optional context for the callback function to be run in
+ * @method addCallback
+ */
+var addCallback = function(type, callback, context) {
+  if (_callbacks[type]  === undefined) {
+    return;
+  }
+  if (typeof callback !== 'function') {
+    return;
+  }
+  _callbacks[type].push({callback: callback, context: context || this});
+};
 
 module.exports = {
   setStylesheet:    setStylesheet,
@@ -371,5 +409,6 @@ module.exports = {
   deleteMessage:    deleteMessage,
   show:             show,
   hide:             hide,
-  debug:            debug
+  debug:            debug,
+  addCallback:      addCallback
 };
