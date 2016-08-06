@@ -44,6 +44,32 @@
       expect(this.variableChanged).toEqual(true);
     });
 
+    describe("ProgressiveKITT.addCallback('show-message')", function() {
+
+      it('should add a callback which will be called when a message is shown', function() {
+        var spyOnShowMsg = jasmine.createSpy();
+        ProgressiveKITT.addCallback('show-message', spyOnShowMsg);
+        expect(spyOnShowMsg).not.toHaveBeenCalled();
+        ProgressiveKITT.addMessage("Curse your sudden but inevitable betrayal");
+        expect(spyOnShowMsg).toHaveBeenCalledTimes(1);
+      });
+
+      it('should not fire callback when alert is shown', function() {
+        var spyOnShowMsg = jasmine.createSpy();
+        ProgressiveKITT.addCallback('show-message', spyOnShowMsg);
+        ProgressiveKITT.addAlert("Curse your sudden but inevitable betrayal");
+        expect(spyOnShowMsg).not.toHaveBeenCalled();
+      });
+
+      it('should not fire callback when confirm is shown', function() {
+        var spyOnShowMsg = jasmine.createSpy();
+        ProgressiveKITT.addCallback('show-message', spyOnShowMsg);
+        ProgressiveKITT.addConfirm("Curse your sudden but inevitable betrayal");
+        expect(spyOnShowMsg).not.toHaveBeenCalled();
+      });
+
+    });
+
   });
 
 })();
