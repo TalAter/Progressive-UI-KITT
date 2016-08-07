@@ -144,6 +144,7 @@ Add a callback function to be called in case one of the following events happens
 
 * `show-message` - Fired when a message is shown
 * `show-alert` - Fired when an alert is shown
+* `show-confirm` - Fired when an alert is shown
 
 #### Examples:
 ````javascript

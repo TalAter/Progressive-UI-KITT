@@ -96,6 +96,32 @@
 
     });
 
+    describe("ProgressiveKITT.addCallback('show-confirm')", function() {
+
+      it('should add a callback which will be called when a confirm is shown', function() {
+        var spyOnShowConfirm = jasmine.createSpy();
+        ProgressiveKITT.addCallback('show-confirm', spyOnShowConfirm);
+        expect(spyOnShowConfirm).not.toHaveBeenCalled();
+        ProgressiveKITT.addConfirm("Curse your sudden but inevitable betrayal");
+        expect(spyOnShowConfirm).toHaveBeenCalledTimes(1);
+      });
+
+      it('should not fire callback when message is shown', function() {
+        var spyOnShowConfirm = jasmine.createSpy();
+        ProgressiveKITT.addCallback('show-confirm', spyOnShowConfirm);
+        ProgressiveKITT.addMessage("Curse your sudden but inevitable betrayal");
+        expect(spyOnShowConfirm).not.toHaveBeenCalled();
+      });
+
+      it('should not fire callback when an alert is shown', function() {
+        var spyOnShowConfirm = jasmine.createSpy();
+        ProgressiveKITT.addCallback('show-confirm', spyOnShowConfirm);
+        ProgressiveKITT.addAlert("Curse your sudden but inevitable betrayal");
+        expect(spyOnShowConfirm).not.toHaveBeenCalled();
+      });
+
+    });
+
   });
 
 })();

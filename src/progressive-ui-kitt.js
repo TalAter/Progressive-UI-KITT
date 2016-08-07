@@ -16,7 +16,7 @@ var _guiNodes;
 var _debugState = false;
 var _messages = [];
 var _listenersRegistered = false;
-var _callbacks = { "show-message": [], "show-alert": [] };
+var _callbacks = { "show-message": [], "show-alert": [], "show-confirm": [] };
 
 
 // method for logging to the console if debug mode is on
@@ -321,6 +321,7 @@ var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined
  */
 var addConfirm = function(contents, button1Label = 'OK', button1Callback = undefined, button2Label = 'Cancel', button2Callback = undefined, options = undefined, context1 = this, context2 = this) {
   // @TODO: Add settings objects details in doc
+  _invokeCallbacks('show-confirm');
   return _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1}, {label: button2Label, cb: button2Callback, context: context2});
 };
 
@@ -377,6 +378,7 @@ var debug = function(newState = true) {
  *
  * * `show-message` - Fired when a message is shown
  * * `show-alert` - Fired when an alert is shown
+ * * `show-confirm` - Fired when an alert is shown
  *
  * #### Examples:
  * ````javascript
