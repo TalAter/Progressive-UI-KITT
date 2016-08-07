@@ -16,7 +16,7 @@ var _guiNodes;
 var _debugState = false;
 var _messages = [];
 var _listenersRegistered = false;
-var _callbacks = { "show-message": [] };
+var _callbacks = { "show-message": [], "show-alert": [] };
 
 
 // method for logging to the console if debug mode is on
@@ -289,6 +289,7 @@ var addMessage = function(contents, options) {
  */
 var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined, options = undefined, context = this) {
   // @TODO: Add settings objects details in doc
+  _invokeCallbacks('show-alert');
   return _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context});
 };
 
@@ -375,6 +376,7 @@ var debug = function(newState = true) {
  * Add a callback function to be called in case one of the following events happens:
  *
  * * `show-message` - Fired when a message is shown
+ * * `show-alert` - Fired when an alert is shown
  *
  * #### Examples:
  * ````javascript
