@@ -402,6 +402,58 @@ var addCallback = function(type, callback, context) {
   _callbacks[type].push({callback: callback, context: context || this});
 };
 
+/**
+ * Remove callbacks from events.
+ *
+ * - Pass an event name and a callback command to remove that callback command from that event type.
+ * - Pass just an event name to remove all callback commands from that event type.
+ * - Pass undefined as event name and a callback command to remove that callback command from all event types.
+ * - Pass no params to remove all callback commands from all event types.
+ *
+ * #### Examples:
+ * ````javascript
+ * ProgressiveKITT.addCallback('show-message', myFunction1);
+ * ProgressiveKITT.addCallback('show-message', myFunction2);
+ * ProgressiveKITT.addCallback('show-alert', myFunction1);
+ * ProgressiveKITT.addCallback('show-alert', myFunction2);
+ *
+ * // Remove all callbacks from all events:
+ * ProgressiveKITT.removeCallback();
+ *
+ * // Remove all callbacks attached to 'show-alert' event:
+ * ProgressiveKITT.removeCallback('show-alert');
+ *
+ * // Remove myFunction2 from being called on 'show-message' event:
+ * ProgressiveKITT.removeCallback('show-message', myFunction2);
+ *
+ * // Remove myFunction1 from being called on all events:
+ * ProgressiveKITT.removeCallback(undefined, myFunction1);
+ * ````
+ *
+ * @param   {String}    [type]      Name of event type to remove callback from
+ * @param   {Function}  [callback]  The callback function to remove
+ * @returns undefined
+ * @method  removeCallback
+ */
+var removeCallback = function(type, callback) {
+  let compareWithCallbackParameter = cb => {
+    return cb.callback !== callback;
+  };
+  // Go over each callback type in callbacks store object
+  Object.keys(_callbacks).forEach(callbackType => {
+    // if this is the type user asked to delete, or she asked to delete all, go ahead.
+    if (type === undefined || type === callbackType) {
+      // If user asked to delete all callbacks in this type or all types
+      if (callback === undefined) {
+          _callbacks[callbackType] = [];
+        } else {
+          // Remove all matching callbacks
+          _callbacks[callbackType] = _callbacks[callbackType].filter(compareWithCallbackParameter);
+      }
+    }
+  });
+};
+
 module.exports = {
   setStylesheet:    setStylesheet,
   vroom:            vroom,
@@ -414,5 +466,6 @@ module.exports = {
   show:             show,
   hide:             hide,
   debug:            debug,
-  addCallback:      addCallback
+  addCallback:      addCallback,
+  removeCallback:   removeCallback
 };

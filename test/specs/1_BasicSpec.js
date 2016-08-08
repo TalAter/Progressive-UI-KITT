@@ -55,6 +55,10 @@
       expect(ProgressiveKITT.addCallback).toEqual(jasmine.any(Function));
     });
 
+    it('should contain removeCallback method', function () {
+      expect(ProgressiveKITT.removeCallback).toEqual(jasmine.any(Function));
+    });
+
     it('should not expose private methods', function () {
       expect(ProgressiveKITT._guiCreated).toBe(undefined);
       expect(ProgressiveKITT._logMessage).toBe(undefined);
