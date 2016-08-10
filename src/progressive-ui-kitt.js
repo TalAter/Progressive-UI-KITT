@@ -16,7 +16,7 @@ var _guiNodes;
 var _debugState = false;
 var _messages = [];
 var _listenersRegistered = false;
-var _callbacks = { "show-message": [], "show-alert": [], "show-confirm": [] };
+var _callbacks = { "show-message": [], "show-alert": [], "show-confirm": [], "hide-message": [] };
 
 
 // method for logging to the console if debug mode is on
@@ -246,10 +246,9 @@ var deleteMessage = function(msgID) {
     _logMessage('deleteMessage() did not find the message with the id', msgID);
     return;
   }
+  _invokeCallbacks('hide-message');
   _deleteMessageFromDOM(msgID);
 };
-
-
 
 /**
  * Draws a message to the GUI
