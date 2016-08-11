@@ -258,7 +258,7 @@ var deleteMessage = function(msgID) {
  * @method addMessage
  */
 var addMessage = function(contents, options) {
-  // @TODO: Add settings objects details in doc
+  // @TODO: Add options object details in doc
   _invokeCallbacks('show-message');
   return _addMessage(contents, options);
 };
@@ -287,7 +287,7 @@ var addMessage = function(contents, options) {
  * @method addAlert
  */
 var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined, options = undefined, context = this) {
-  // @TODO: Add settings objects details in doc
+  // @TODO: Add options object details in doc
   _invokeCallbacks('show-alert');
   return _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context});
 };
@@ -319,7 +319,7 @@ var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined
  * @method addConfirm
  */
 var addConfirm = function(contents, button1Label = 'OK', button1Callback = undefined, button2Label = 'Cancel', button2Callback = undefined, options = undefined, context1 = this, context2 = this) {
-  // @TODO: Add settings objects details in doc
+  // @TODO: Add options object details in doc
   _invokeCallbacks('show-confirm');
   return _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1}, {label: button2Label, cb: button2Callback, context: context2});
 };
