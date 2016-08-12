@@ -156,6 +156,7 @@ var _registerListeners = function() {
   }
 };
 
+// Receives a message id, and deletes the message node from the DOM
 var _deleteMessageFromDOM = function(msgID) {
   var node = document.getElementById(`progressivekitt-message-${msgID}`);
   node.classList.remove('progressivekitt-message--shown');
