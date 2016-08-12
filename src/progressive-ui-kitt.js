@@ -19,7 +19,12 @@ var _listenersRegistered = false;
 var _callbacks = { "show-message": [], "show-alert": [], "show-confirm": [], "hide-message": [] };
 
 
-// method for logging to the console if debug mode is on
+// Return a message element for a given message id
+var _getMessageElement = function(msgID) {
+  return document.getElementById(`progressivekitt-message-${msgID}`);
+};
+
+// Log a message to the console if debug mode is on
 var _logMessage = function(text, extraParameters = 'font-weight: bold; color: #00f;') {
   if (!_debugState) {
     return;
@@ -158,7 +163,7 @@ var _registerListeners = function() {
 
 // Receives a message id, and deletes the message node from the DOM
 var _deleteMessageFromDOM = function(msgID) {
-  var node = document.getElementById(`progressivekitt-message-${msgID}`);
+  var node = _getMessageElement(msgID);
   node.classList.remove('progressivekitt-message--shown');
   setTimeout(() => {
     if (node && node.parentNode) {

@@ -60,6 +60,7 @@
     });
 
     it('should not expose private methods', function () {
+      expect(ProgressiveKITT._getMessageElement).toBe(undefined);
       expect(ProgressiveKITT._guiCreated).toBe(undefined);
       expect(ProgressiveKITT._logMessage).toBe(undefined);
       expect(ProgressiveKITT._updateStylesheet).toBe(undefined);
