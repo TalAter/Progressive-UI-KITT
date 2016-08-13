@@ -265,8 +265,9 @@ var deleteMessage = function(msgID) {
  */
 var addMessage = function(contents, options) {
   // @TODO: Add options object details in doc
+  var msgID = _addMessage(contents, options);
   _invokeCallbacks('show-message');
-  return _addMessage(contents, options);
+  return msgID;
 };
 
 /**
@@ -294,8 +295,9 @@ var addMessage = function(contents, options) {
  */
 var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined, options = undefined, context = this) {
   // @TODO: Add options object details in doc
+  var msgID = _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context});
   _invokeCallbacks('show-alert');
-  return _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context});
+  return msgID;
 };
 
 /**
@@ -326,8 +328,9 @@ var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined
  */
 var addConfirm = function(contents, button1Label = 'OK', button1Callback = undefined, button2Label = 'Cancel', button2Callback = undefined, options = undefined, context1 = this, context2 = this) {
   // @TODO: Add options object details in doc
+  var msgID =  _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1}, {label: button2Label, cb: button2Callback, context: context2});
   _invokeCallbacks('show-confirm');
-  return _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1}, {label: button2Label, cb: button2Callback, context: context2});
+  return msgID;
 };
 
 /**
