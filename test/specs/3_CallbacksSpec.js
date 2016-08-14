@@ -3,6 +3,15 @@
 
   describe('ProgressiveKITT.addCallback', function() {
 
+    var args;
+    var saveArguments = function() {
+      args = arguments;
+    };
+
+    beforeEach(function() {
+      args = undefined;
+    });
+
     it('should always return undefined', function() {
       expect(ProgressiveKITT.addCallback()).toEqual(undefined);
       expect(ProgressiveKITT.addCallback('blergh')).toEqual(undefined);
@@ -52,6 +61,12 @@
         expect(spyOnShowMsg).not.toHaveBeenCalled();
         ProgressiveKITT.addMessage("Curse your sudden but inevitable betrayal");
         expect(spyOnShowMsg).toHaveBeenCalledTimes(1);
+      });
+
+      it('should call the callback with the first argument containing message DOM element', function() {
+        ProgressiveKITT.addCallback('show-message', saveArguments);
+        ProgressiveKITT.addMessage("Curse your sudden but inevitable betrayal");
+        expect(args[0].id.slice(0, 25)).toEqual('progressivekitt-message-1');
       });
 
       it('should not fire callback when alert is shown', function() {

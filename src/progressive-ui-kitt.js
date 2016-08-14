@@ -266,7 +266,7 @@ var deleteMessage = function(msgID) {
 var addMessage = function(contents, options) {
   // @TODO: Add options object details in doc
   var msgID = _addMessage(contents, options);
-  _invokeCallbacks('show-message');
+  _invokeCallbacks('show-message', _getMessageElement(msgID));
   return msgID;
 };
 
