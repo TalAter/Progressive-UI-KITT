@@ -296,7 +296,7 @@ var addMessage = function(contents, options) {
 var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined, options = undefined, context = this) {
   // @TODO: Add options object details in doc
   var msgID = _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context});
-  _invokeCallbacks('show-alert');
+  _invokeCallbacks('show-alert', _getMessageElement(msgID));
   return msgID;
 };
 

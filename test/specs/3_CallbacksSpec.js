@@ -95,6 +95,12 @@
         expect(spyOnShowAlert).toHaveBeenCalledTimes(1);
       });
 
+      it('should call the callback with the first argument containing message DOM element', function() {
+        ProgressiveKITT.addCallback('show-alert', saveArguments);
+        ProgressiveKITT.addAlert("Curse your sudden but inevitable betrayal");
+        expect(args[0].id.slice(0, 25)).toEqual('progressivekitt-message-1');
+      });
+
       it('should not fire callback when message is shown', function() {
         var spyOnShowAlert = jasmine.createSpy();
         ProgressiveKITT.addCallback('show-alert', spyOnShowAlert);
