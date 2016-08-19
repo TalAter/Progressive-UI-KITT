@@ -329,7 +329,7 @@ var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined
 var addConfirm = function(contents, button1Label = 'OK', button1Callback = undefined, button2Label = 'Cancel', button2Callback = undefined, options = undefined, context1 = this, context2 = this) {
   // @TODO: Add options object details in doc
   var msgID =  _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1}, {label: button2Label, cb: button2Callback, context: context2});
-  _invokeCallbacks('show-confirm');
+  _invokeCallbacks('show-confirm', _getMessageElement(msgID));
   return msgID;
 };
 
