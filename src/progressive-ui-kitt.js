@@ -96,6 +96,10 @@ var _addMessage = function(contents, options, ...buttons) {
   newMessageNode.innerHTML = contents;
   newMessageNode.classList.add('progressivekitt-message');
 
+  if (options.class) {
+    newMessageNode.classList.add(options.class.toString());
+  }
+
   var newMessage = {
     id: messageId,
     contents: contents
