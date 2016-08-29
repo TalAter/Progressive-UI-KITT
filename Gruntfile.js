@@ -56,13 +56,22 @@ module.exports = function(grunt) {
       tasks: ['default']
     },
     connect: {
-      server: {
+      devel: {
         options: {
           protocol: 'http',
           port: 8443,
           hostname: '*',
           base: '.',
           open: 'http://localhost:8443/demo'
+        }
+      },
+      homepage: {
+        options: {
+          protocol: 'http',
+          port: 8443,
+          hostname: '*',
+          base: '.',
+          open: 'http://localhost:8443/site'
         }
       }
     },
@@ -145,6 +154,7 @@ module.exports = function(grunt) {
   // Register tasks.
   grunt.registerTask('default', ['jshint', 'browserify', 'sass', 'jasmine', 'markdox']);
   grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('serve', ['default', 'connect', 'watch']);
+  grunt.registerTask('serve', ['default', 'connect:devel', 'watch']);
+  grunt.registerTask('homepage', ['default', 'connect:homepage', 'watch']);
 
 };
