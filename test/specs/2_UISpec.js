@@ -301,6 +301,20 @@
 
     });
 
+    describe('ProgressiveKITT.addAlert(text, label, callback, { class: string })', function() {
+
+      it('should add a class to the alert div equal to the value passed as `class` in the settings object (if it is a string)', function () {
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log('Aha');}, {class: 'progressivekitt-message--offline'});
+        expect(getLatestMessage()).toHaveClass('progressivekitt-message--offline');
+      });
+
+      it('should add a class to the alert div equal to the string representation of the value passed as `class` in the settings object (if it is not a string)', function () {
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log('Aha');}, { class: true });
+        expect(getLatestMessage()).toHaveClass('true');
+      });
+
+    });
+
   });
 
 
