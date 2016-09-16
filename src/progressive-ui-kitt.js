@@ -467,17 +467,17 @@ var removeCallback = function(type, callback) {
 };
 
 module.exports = {
-  setStylesheet:    setStylesheet,
-  vroom:            vroom,
-  render:           render,
-  addMessage:       addMessage,
-  addAlert:         addAlert,
-  addConfirm:       addConfirm,
-  deleteMessages:   deleteMessages,
-  deleteMessage:    deleteMessage,
-  show:             show,
-  hide:             hide,
-  debug:            debug,
-  addCallback:      addCallback,
-  removeCallback:   removeCallback
+  setStylesheet,
+  vroom,
+  render,
+  addMessage,
+  addAlert,
+  addConfirm,
+  deleteMessages,
+  deleteMessage,
+  show,
+  hide,
+  debug,
+  addCallback,
+  removeCallback
 };
