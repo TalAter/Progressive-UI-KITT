@@ -80,7 +80,7 @@ var addConfirm = function(contents, button1Label, button1Callback, button2Label,
 };
 
 module.exports = {
-  addMessage:     addMessage,
-  addAlert:       addAlert,
-  addConfirm:     addConfirm
+  addMessage,
+  addAlert,
+  addConfirm
 };
