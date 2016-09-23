@@ -246,16 +246,16 @@ var deleteMessages = function() {
  * @method deleteMessage
  */
 var deleteMessage = function(msgID) {
-  const originalMessageLength = _messages.length;
   // Remove from array of messages
-  _messages = _messages.filter((message) => {
+  let filteredMessages = _messages.filter((message) => {
     return message.id !== msgID;
   });
   // If message id was not found, log a notice to console.
-  if (originalMessageLength === _messages.length) {
+  if (filteredMessages.length === _messages.length) {
     _logMessage('deleteMessage() did not find the message with the id', msgID);
     return;
   }
+  _messages = filteredMessages;
   _invokeCallbacks('hide-message');
   _deleteMessageFromDOM(msgID);
 };
