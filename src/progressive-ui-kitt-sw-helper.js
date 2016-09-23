@@ -28,8 +28,8 @@ var _postMessageToAllClients = function(payload, type) {
  */
 var addMessage = function(contents, options) {
   _postMessageToAllClients({
-    contents: contents,
-    options: options
+    contents,
+    options
   }, 'message');
 };
 
@@ -45,11 +45,11 @@ var addMessage = function(contents, options) {
  */
 var addAlert = function(contents, buttonLabel, buttonCallback, options, context) {
   _postMessageToAllClients({
-    contents: contents,
-    buttonLabel: buttonLabel,
-    buttonCallback: buttonCallback,
-    options: options,
-    context: context
+    contents,
+    buttonLabel,
+    buttonCallback,
+    options,
+    context
   }, 'alert');
 };
 
@@ -68,14 +68,14 @@ var addAlert = function(contents, buttonLabel, buttonCallback, options, context)
  */
 var addConfirm = function(contents, button1Label, button1Callback, button2Label, button2Callback, options, context1, context2) {
   _postMessageToAllClients({
-    contents: contents,
-    button1Label: button1Label,
-    button1Callback: button1Callback,
-    button2Label: button2Label,
-    button2Callback: button2Callback,
-    options: options,
-    context1: context1,
-    context2: context2
+    contents,
+    button1Label,
+    button1Callback,
+    button2Label,
+    button2Callback,
+    options,
+    context1,
+    context2
   }, 'confirm');
 };
 
