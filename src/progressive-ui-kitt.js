@@ -247,7 +247,7 @@ var deleteMessages = function() {
  */
 var deleteMessage = function(msgID) {
   // Remove from array of messages
-  let filteredMessages = _messages.filter((message) => {
+  let filteredMessages = _messages.filter(message => {
     return message.id !== msgID;
   });
   // If message id was not found, log a notice to console.
