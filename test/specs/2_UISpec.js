@@ -281,6 +281,11 @@
         expect(getLatestMessageButtons()[0].innerText).toEqual('OK');
       });
 
+      it('should be labeled with the value passed to it as a label', function () {
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Yeah!');
+        expect(getLatestMessageButtons()[0].innerText).toEqual('Yeah!');
+      });
+
       it('should dismiss the alert message when clicked if no callback function was passed', function () {
         ProgressiveKITT.addAlert('Time for some thrilling heroics');
         simulateClick(getLatestMessageButtons()[0]);
