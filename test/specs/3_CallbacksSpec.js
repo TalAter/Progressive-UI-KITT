@@ -173,7 +173,7 @@
         var spyOnHideAlert = jasmine.createSpy();
         ProgressiveKITT.addCallback('hide-message', spyOnHideAlert);
         expect(spyOnHideAlert).not.toHaveBeenCalled();
-        ProgressiveKITT.addAlert("Curse your sudden but inevitable betrayal", "OK", function() {}, { hideAfter: 5000});
+        ProgressiveKITT.addAlert("Curse your sudden but inevitable betrayal", "OK", { hideAfter: 5000});
         jasmine.clock().tick(6000);
         expect(spyOnHideAlert).toHaveBeenCalledTimes(1);
       });
@@ -182,7 +182,7 @@
         var spyOnHideConfirm = jasmine.createSpy();
         ProgressiveKITT.addCallback('hide-message', spyOnHideConfirm);
         expect(spyOnHideConfirm).not.toHaveBeenCalled();
-        ProgressiveKITT.addConfirm("Curse your sudden but inevitable betrayal", "OK", function() {}, "Cancel", function() {}, { hideAfter: 5000});
+        ProgressiveKITT.addConfirm("Curse your sudden but inevitable betrayal", "OK", "Cancel", { hideAfter: 5000});
         jasmine.clock().tick(6000);
         expect(spyOnHideConfirm).toHaveBeenCalledTimes(1);
       });

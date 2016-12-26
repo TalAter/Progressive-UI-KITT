@@ -281,9 +281,14 @@
         expect(getLatestMessageButtons()[0].innerText).toEqual('OK');
       });
 
-      it('should be labeled with the value passed to it as a label', function () {
+      it('should be labeled with custom label when button argument is a string', function () {
         ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Yeah!');
         expect(getLatestMessageButtons()[0].innerText).toEqual('Yeah!');
+      });
+
+      it('should be labeled with custom label when button argument is an object containing a label attribute', function () {
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', {label: 'Aha'});
+        expect(getLatestMessageButtons()[0].innerText).toEqual('Aha');
       });
 
       it('should dismiss the alert message when clicked if no callback function was passed', function () {
@@ -296,7 +301,7 @@
 
       it('should call the callback function and dismiss the alert message when clicked', function () {
         var spyOnButton = jasmine.createSpy();
-        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Spy', spyOnButton);
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', {label: 'Spy', callback: spyOnButton});
         expect(spyOnButton).not.toHaveBeenCalled();
         simulateClick(getLatestMessageButtons()[0]);
         expect(spyOnButton).toHaveBeenCalledTimes(1);
@@ -306,15 +311,15 @@
 
     });
 
-    describe('ProgressiveKITT.addAlert(text, label, callback, { class: string })', function() {
+    describe('ProgressiveKITT.addAlert(text, button, { class: string })', function() {
 
       it('should add a class to the alert div equal to the value passed as `class` in the settings object (if it is a string)', function () {
-        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log('Aha');}, {class: 'progressivekitt-message--offline'});
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', {class: 'progressivekitt-message--offline'});
         expect(getLatestMessage()).toHaveClass('progressivekitt-message--offline');
       });
 
       it('should add a class to the alert div equal to the string representation of the value passed as `class` in the settings object (if it is not a string)', function () {
-        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log('Aha');}, { class: true });
+        ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', { class: true });
         expect(getLatestMessage()).toHaveClass('true');
       });
 
@@ -378,7 +383,7 @@
 
       it('should call the callback function and dismiss the alert message when clicked', function () {
         var spyOnButton = jasmine.createSpy();
-        ProgressiveKITT.addConfirm('You know what the chain of command is?', 'Spy', spyOnButton);
+        ProgressiveKITT.addConfirm('You know what the chain of command is?', {label: 'Spy', callback: spyOnButton});
         expect(spyOnButton).not.toHaveBeenCalled();
         simulateClick(getLatestMessageButtons()[0]);
         expect(spyOnButton).toHaveBeenCalledTimes(1);
@@ -406,6 +411,16 @@
         expect(getLatestMessageButtons()[1].innerText).toEqual('Cancel');
       });
 
+      it('should be labeled with custom label when second button argument is a string', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?', 'Yes', 'No');
+        expect(getLatestMessageButtons()[1].innerText).toEqual('No');
+      });
+
+      it('should be labeled with custom label when second button argument is an object containing a label attribute', function () {
+        ProgressiveKITT.addConfirm('You know what the chain of command is?', 'Yes', {label: 'No'});
+        expect(getLatestMessageButtons()[1].innerText).toEqual('No');
+      });
+
       it('should dismiss the alert message when clicked if no callback function was passed', function () {
         ProgressiveKITT.addConfirm('You know what the chain of command is?');
         simulateClick(getLatestMessageButtons()[1]);
@@ -417,7 +432,7 @@
       it('should call the callback function and dismiss the alert message when clicked', function () {
         var spyOnButton1 = jasmine.createSpy();
         var spyOnButton2 = jasmine.createSpy();
-        ProgressiveKITT.addConfirm('You know what the chain of command is?', 'Yes', spyOnButton1, 'No', spyOnButton2);
+        ProgressiveKITT.addConfirm('You know what the chain of command is?', {label: 'Yes', callback: spyOnButton1}, {label: 'No', callback: spyOnButton2});
         expect(spyOnButton1).not.toHaveBeenCalled();
         expect(spyOnButton2).not.toHaveBeenCalled();
         simulateClick(getLatestMessageButtons()[1]);

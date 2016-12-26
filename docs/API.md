@@ -55,7 +55,7 @@ Draws a message to the GUI
 * *string* contents The contents of the message (text or HTML)
 * *Object* options Options for this message
 
-## addAlert(string, string, function, Object, Object)
+## addAlert(string, string|Object, Object)
 
 Draws a message to the GUI with a single button.
 Defaults: Button is labeled `OK` and dismisses the message.
@@ -65,22 +65,24 @@ Some examples:
 // Create a simple alert with some text and the default button labeled `OK` which will dismiss the alert:
 ProgressiveKITT.addAlert('Time for some thrilling heroics');
 
+// Create a simple alert with some text and a custom button:
+ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!');
+ProgressiveKITT.addAlert('Time for some thrilling heroics', {label: 'Go!'});
+
 // Create an alert with a button that will log the function's context (i.e. this) to the console.
 // Context will be the ProgressiveKITT object by default:
-ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);});
+ProgressiveKITT.addAlert('Time for some thrilling heroics', {label:'Go!', callback: function() {console.log(this);}});
 // Same as the previous example but the callback function will be run with the window as its context (ie this)
-ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);}, {}, window);
+ProgressiveKITT.addAlert('Time for some thrilling heroics', {label:'Go!', callback: function() {console.log(this);}, context: window});
 ````
 
 ### Params:
 
 * *string* contents The contents of the message (text or HTML)
-* *string* buttonLabel The text to appear on the button (defaults to `OK`)
-* *function* buttonCallback A callback function to be called when button is pressed (defaults to dismissing message)
+* *string|Object* button The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
 * *Object* options Options for this message
-* *Object* context Optional context for the callback function. Defaults to ProgressiveKITT
 
-## addConfirm(string, string, function, string, function, Object, Object, Object)
+## addConfirm(string, string|Object, string|Object, Object)
 
 Draws a message to the GUI with two buttons.
 Defaults: Buttons are labeled `OK` and `Cancel` and both dismiss the message.
@@ -92,21 +94,17 @@ ProgressiveKITT.addConfirm('You know what the chain of command is?');
 
 // Create a confirmation with a yes and no buttons that will log each function's context (i.e. this) to the console.
 // Context will be the ProgressiveKITT object by default:
-ProgressiveKITT.addConfirm('Ready?', 'Yes', function() {console.log('Yes!');}, 'No',  function() {console.log('No!');});
+ProgressiveKITT.addConfirm('Ready?', {label: 'Yes', callback: function() {console.log('Yes!');}}, {label:'No', callback: function() {console.log('No!');}});
 // Same as the previous example but the callback functions will be run with the window as its context (ie this)
-ProgressiveKITT.addConfirm('Ready?', 'Yes', function() {console.log('Yes!');}, 'No',  function() {console.log('No!');}, {}, window, window);
+ProgressiveKITT.addConfirm('Ready?', {label: 'Yes', callback: function() {console.log('Yes!');}, context: window}, {label:'No', callback: function() {console.log('No!');}, context: window});
 ````
 
 ### Params:
 
 * *string* contents The contents of the message (text or HTML)
-* *string* button1Label The text to appear on the 1st button (defaults to `OK`)
-* *function* button1Callback A callback function to be called when 1st button is pressed (defaults to dismissing message)
-* *string* button2Label The text to appear on the 2nd button (defaults to `Cancel`)
-* *function* button2Callback A callback function to be called when button is pressed (defaults to dismissing message)
+* *string|Object* button1 The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
+* *string|Object* button2 The text to appear on the button (defaults to `Cancel`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
 * *Object* options Options for this message
-* *Object* context1 Optional context for the 1st callback function. Defaults to ProgressiveKITT
-* *Object* context2 Optional context for the 2nd callback function. Defaults to ProgressiveKITT
 
 ## hide()
 

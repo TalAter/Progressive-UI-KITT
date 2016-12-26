@@ -183,7 +183,13 @@ var _invokeCallbacks = function(callbackType, ...args) {
   });
 };
 
-
+var _parseButtonObject = function(button) {
+  let buttonObject = ('string' === typeof button) ? {label: button} : button;
+  if (!buttonObject.context) {
+    buttonObject.context = this;
+  }
+  return buttonObject;
+};
 
 /**
  * Call after configuring KITT, to render its interface.
@@ -283,23 +289,26 @@ var addMessage = function(contents, options) {
  * // Create a simple alert with some text and the default button labeled `OK` which will dismiss the alert:
  * ProgressiveKITT.addAlert('Time for some thrilling heroics');
  *
+ * // Create a simple alert with some text and a custom button:
+ * ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!');
+ * ProgressiveKITT.addAlert('Time for some thrilling heroics', {label: 'Go!'});
+ *
  * // Create an alert with a button that will log the function's context (i.e. this) to the console.
  * // Context will be the ProgressiveKITT object by default:
- * ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);});
+ * ProgressiveKITT.addAlert('Time for some thrilling heroics', {label:'Go!', callback: function() {console.log(this);}});
  * // Same as the previous example but the callback function will be run with the window as its context (ie this)
- * ProgressiveKITT.addAlert('Time for some thrilling heroics', 'Go!', function() {console.log(this);}, {}, window);
+ * ProgressiveKITT.addAlert('Time for some thrilling heroics', {label:'Go!', callback: function() {console.log(this);}, context: window});
  * ````
  *
  * @param string contents The contents of the message (text or HTML)
- * @param string buttonLabel The text to appear on the button (defaults to `OK`)
- * @param function buttonCallback A callback function to be called when button is pressed (defaults to dismissing message)
+ * @param string|Object button The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
  * @param Object options Options for this message
- * @param Object context Optional context for the callback function. Defaults to ProgressiveKITT
  * @method addAlert
  */
-var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined, options = undefined, context = this) {
+var addAlert = function(contents, button = 'OK', options = undefined) {
+  button = _parseButtonObject(button);
   // @TODO: Add options object details in doc
-  var msgID = _addMessage(contents, options, {label: buttonLabel, cb: buttonCallback, context: context});
+  var msgID = _addMessage(contents, options, {label: button.label, cb: button.callback, context: button.context});
   _invokeCallbacks('show-alert', _getMessageElement(msgID));
   return msgID;
 };
@@ -315,24 +324,22 @@ var addAlert = function(contents, buttonLabel = 'OK', buttonCallback = undefined
  *
  * // Create a confirmation with a yes and no buttons that will log each function's context (i.e. this) to the console.
  * // Context will be the ProgressiveKITT object by default:
- * ProgressiveKITT.addConfirm('Ready?', 'Yes', function() {console.log('Yes!');}, 'No',  function() {console.log('No!');});
+ * ProgressiveKITT.addConfirm('Ready?', {label: 'Yes', callback: function() {console.log('Yes!');}}, {label:'No', callback: function() {console.log('No!');}});
  * // Same as the previous example but the callback functions will be run with the window as its context (ie this)
- * ProgressiveKITT.addConfirm('Ready?', 'Yes', function() {console.log('Yes!');}, 'No',  function() {console.log('No!');}, {}, window, window);
+ * ProgressiveKITT.addConfirm('Ready?', {label: 'Yes', callback: function() {console.log('Yes!');}, context: window}, {label:'No', callback: function() {console.log('No!');}, context: window});
  * ````
  *
  * @param string contents The contents of the message (text or HTML)
- * @param string button1Label The text to appear on the 1st button (defaults to `OK`)
- * @param function button1Callback A callback function to be called when 1st button is pressed (defaults to dismissing message)
- * @param string button2Label The text to appear on the 2nd button (defaults to `Cancel`)
- * @param function button2Callback A callback function to be called when button is pressed (defaults to dismissing message)
+ * @param string|Object button1 The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
+ * @param string|Object button2 The text to appear on the button (defaults to `Cancel`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
  * @param Object options Options for this message
- * @param Object context1 Optional context for the 1st callback function. Defaults to ProgressiveKITT
- * @param Object context2 Optional context for the 2nd callback function. Defaults to ProgressiveKITT
  * @method addConfirm
  */
-var addConfirm = function(contents, button1Label = 'OK', button1Callback = undefined, button2Label = 'Cancel', button2Callback = undefined, options = undefined, context1 = this, context2 = this) {
+var addConfirm = function(contents, button1 = 'OK', button2 = 'Cancel', options = undefined) {
+  button1 = _parseButtonObject(button1);
+  button2 = _parseButtonObject(button2);
   // @TODO: Add options object details in doc
-  var msgID =  _addMessage(contents, options, {label: button1Label, cb: button1Callback, context: context1}, {label: button2Label, cb: button2Callback, context: context2});
+  var msgID =  _addMessage(contents, options, {label: button1.label, cb: button1.callback, context: button1.context}, {label: button2.label, cb: button2.callback, context: button2.context});
   _invokeCallbacks('show-confirm', _getMessageElement(msgID));
   return msgID;
 };
