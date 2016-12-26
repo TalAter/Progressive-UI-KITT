@@ -10,7 +10,7 @@
  https://github.com/TalAter/Progressive-UI-KITT
  -->
 
-## addMessage(string, Object)
+## addMessage(string, Object, string|Object)
 
 Draws a new message to the GUI
 
@@ -18,8 +18,9 @@ Draws a new message to the GUI
 
 * *string* contents The contents of the message (text or HTML)
 * *Object* options Options for this message
+* *string|Object* A client ID, or an actual client object to send the message to. Defaults to all clients.
 
-## addAlert(string, string|Object, Object)
+## addAlert(string, string|Object, Object, string|Object)
 
 Draws a new alert message to the GUI
 
@@ -28,8 +29,9 @@ Draws a new alert message to the GUI
 * *string* contents The contents of the message (text or HTML)
 * *string|Object* button The text to appear on the button (defaults to `OK`), or an object containing the label (e.g. {label: 'OK'})
 * *Object* options Options for this message
+* *string|Object* A client ID, or an actual client object to send the message to. Defaults to all clients.
 
-## addConfirm(string, string|Object, string|Object, Object)
+## addConfirm(string, string|Object, string|Object, Object, string|Object)
 
 Draws a confirmation message to the GUI with two buttons.
 
@@ -39,6 +41,7 @@ Draws a confirmation message to the GUI with two buttons.
 * *string|Object* button1 The text to appear on the button (defaults to `OK`), or an object containing the label (e.g. {label: 'OK'})
 * *string|Object* button2 The text to appear on the button (defaults to `Cancel`), or an object containing the label (e.g. {label: 'Cancel'})
 * *Object* options Options for this message
+* *string|Object* A client ID, or an actual client object to send the message to. Defaults to all clients.
 
 <!-- End src/progressive-ui-kitt-sw-helper.js -->
 
