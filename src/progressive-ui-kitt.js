@@ -282,6 +282,7 @@ var addMessage = function(contents, options) {
 
 /**
  * Draws a message to the GUI with a single button.
+ *
  * Defaults: Button is labeled `OK` and dismisses the message.
  *
  * Some examples:
@@ -296,12 +297,12 @@ var addMessage = function(contents, options) {
  * // Create an alert with a button that will log the function's context (i.e. this) to the console.
  * // Context will be the ProgressiveKITT object by default:
  * ProgressiveKITT.addAlert('Time for some thrilling heroics', {label:'Go!', callback: function() {console.log(this);}});
- * // Same as the previous example but the callback function will be run with the window as its context (ie this)
+ * // Same as the previous example but the callback function will be run with the window as its context (i.e. this)
  * ProgressiveKITT.addAlert('Time for some thrilling heroics', {label:'Go!', callback: function() {console.log(this);}, context: window});
  * ````
  *
  * @param string contents The contents of the message (text or HTML)
- * @param string|Object button The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
+ * @param string|Object button The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. `{label: 'ok', callback: fn, context: window}`)
  * @param Object options Options for this message
  * @method addAlert
  */
@@ -315,6 +316,7 @@ var addAlert = function(contents, button = 'OK', options = undefined) {
 
 /**
  * Draws a message to the GUI with two buttons.
+ *
  * Defaults: Buttons are labeled `OK` and `Cancel` and both dismiss the message.
  *
  * Some examples:
@@ -325,13 +327,13 @@ var addAlert = function(contents, button = 'OK', options = undefined) {
  * // Create a confirmation with a yes and no buttons that will log each function's context (i.e. this) to the console.
  * // Context will be the ProgressiveKITT object by default:
  * ProgressiveKITT.addConfirm('Ready?', {label: 'Yes', callback: function() {console.log('Yes!');}}, {label:'No', callback: function() {console.log('No!');}});
- * // Same as the previous example but the callback functions will be run with the window as its context (ie this)
+ * // Same as the previous example but the callback functions will be run with the window as its context (i.e. this)
  * ProgressiveKITT.addConfirm('Ready?', {label: 'Yes', callback: function() {console.log('Yes!');}, context: window}, {label:'No', callback: function() {console.log('No!');}, context: window});
  * ````
  *
  * @param string contents The contents of the message (text or HTML)
- * @param string|Object button1 The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
- * @param string|Object button2 The text to appear on the button (defaults to `Cancel`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: this})
+ * @param string|Object button1 The text to appear on the button (defaults to `OK`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: window})
+ * @param string|Object button2 The text to appear on the button (defaults to `Cancel`), or an object containing details about the button (e.g. {label: 'ok', callback: fn, context: window})
  * @param Object options Options for this message
  * @method addConfirm
  */
