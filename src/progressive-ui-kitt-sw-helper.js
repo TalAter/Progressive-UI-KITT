@@ -19,6 +19,11 @@ var _postMessageToAllClients = function(payload, type) {
   });
 };
 
+// Parse a button argument to make sure it is an object with the structure and contents KITT expects
+var _parseButtonObject = function(button) {
+  return ('string' === typeof button) ? {label: button} : button;
+};
+
 /**
  * Draws a new message to the GUI
  *
@@ -37,19 +42,18 @@ var addMessage = function(contents, options) {
  * Draws a new alert message to the GUI
  *
  * @param string contents The contents of the message (text or HTML)
- * @param string buttonLabel The text to appear on the button (defaults to `OK`)
- * @param function buttonCallback A callback function to be called when button is pressed (defaults to dismissing message)
+ * @param string|Object button The text to appear on the button (defaults to `OK`), or an object containing the label (e.g. {label: 'OK'})
  * @param Object options Options for this message
- * @param Object context Optional context for the callback function. Defaults to ProgressiveKITT
  * @method addAlert
  */
-var addAlert = function(contents, buttonLabel, buttonCallback, options, context) {
+var addAlert = function(contents, button = 'OK', options = {}) {
+  button = _parseButtonObject(button);
   _postMessageToAllClients({
     contents,
-    buttonLabel,
-    buttonCallback,
-    options,
-    context
+    button: {
+      label: button.label
+    },
+    options
   }, 'alert');
 };
 
@@ -57,25 +61,23 @@ var addAlert = function(contents, buttonLabel, buttonCallback, options, context)
  * Draws a confirmation message to the GUI with two buttons.
  *
  * @param string contents The contents of the message (text or HTML)
- * @param string button1Label The text to appear on the 1st button (defaults to `OK`)
- * @param function button1Callback A callback function to be called when 1st button is pressed (defaults to dismissing message)
- * @param string button2Label The text to appear on the 2nd button (defaults to `Cancel`)
- * @param function button2Callback A callback function to be called when button is pressed (defaults to dismissing message)
+ * @param string|Object button1 The text to appear on the button (defaults to `OK`), or an object containing the label (e.g. {label: 'OK'})
+ * @param string|Object button2 The text to appear on the button (defaults to `Cancel`), or an object containing the label (e.g. {label: 'Cancel'})
  * @param Object options Options for this message
- * @param Object context1 Optional context for the 1st callback function. Defaults to ProgressiveKITT
- * @param Object context2 Optional context for the 2nd callback function. Defaults to ProgressiveKITT
  * @method addConfirm
  */
-var addConfirm = function(contents, button1Label, button1Callback, button2Label, button2Callback, options, context1, context2) {
+var addConfirm = function(contents, button1 = 'OK', button2 = 'Cancel', options = {}) {
+  button1 = _parseButtonObject(button1);
+  button2 = _parseButtonObject(button2);
   _postMessageToAllClients({
     contents,
-    button1Label,
-    button1Callback,
-    button2Label,
-    button2Callback,
+    button1: {
+      label: button1.label
+    },
+    button2: {
+      label: button2.label
+    },
     options,
-    context1,
-    context2
   }, 'confirm');
 };
 

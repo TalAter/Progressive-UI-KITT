@@ -145,10 +145,10 @@ var _messageListener = function({data: data}) {
         ProgressiveKITT.addMessage(payload.contents, payload.options);
         break;
       case 'pkitt-alert':
-        ProgressiveKITT.addAlert(payload.contents, payload.buttonLabel, payload.buttonCallback, payload.options, payload.context);
+        ProgressiveKITT.addAlert(payload.contents, payload.button.label, payload.options);
         break;
       case 'pkitt-confirm':
-        ProgressiveKITT.addConfirm(payload.contents, payload.button1Label, payload.button1Callback, payload.button2Label, payload.button2Callback, payload.options, payload.context1, payload.context2);
+        ProgressiveKITT.addConfirm(payload.contents, payload.button1.label, payload.button2.label, payload.options);
         break;
     }
   }
@@ -183,6 +183,7 @@ var _invokeCallbacks = function(callbackType, ...args) {
   });
 };
 
+// Parse a button argument to make sure it is an object with the structure and contents KITT expects
 var _parseButtonObject = function(button) {
   let buttonObject = ('string' === typeof button) ? {label: button} : button;
   if (!buttonObject.context) {
