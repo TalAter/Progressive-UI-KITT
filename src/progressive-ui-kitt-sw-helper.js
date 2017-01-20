@@ -8,7 +8,7 @@
  -->
  */
 
-"use strict";
+'use strict';
 
 // Method used to post messages to all of a service worker's clients, including uncontrolled ones.
 var _postMessageToClients = function(payload, type, client) {

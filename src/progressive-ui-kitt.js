@@ -8,7 +8,7 @@ https://github.com/TalAter/Progressive-UI-KITT
 -->
 */
 
-"use strict";
+'use strict';
 
 var _stylesheet;
 var _stylesheetNode;
@@ -16,7 +16,7 @@ var _guiNodes;
 var _debugState = false;
 var _messages = [];
 var _listenersRegistered = false;
-var _callbacks = { "show-message": [], "show-alert": [], "show-confirm": [], "hide-message": [] };
+var _callbacks = { 'show-message': [], 'show-alert': [], 'show-confirm': [], 'hide-message': [] };
 
 
 // Return a message element for a given message id
@@ -118,7 +118,7 @@ var _addMessage = function(contents, options, ...buttons) {
         }
         ProgressiveKITT.deleteMessage(messageId);
       };
-      document.getElementById(`progressivekitt-button-${buttonId}-${messageId}`).addEventListener("click", buttonCallback, false);
+      document.getElementById(`progressivekitt-button-${buttonId}-${messageId}`).addEventListener('click', buttonCallback, false);
     }
   });
 
@@ -141,15 +141,15 @@ var _messageListener = function({data: data}) {
   if (typeof data === 'object') {
     var payload = data.payload;
     switch (data.action) {
-      case 'pkitt-message':
-        ProgressiveKITT.addMessage(payload.contents, payload.options);
-        break;
-      case 'pkitt-alert':
-        ProgressiveKITT.addAlert(payload.contents, payload.button.label, payload.options);
-        break;
-      case 'pkitt-confirm':
-        ProgressiveKITT.addConfirm(payload.contents, payload.button1.label, payload.button2.label, payload.options);
-        break;
+    case 'pkitt-message':
+      ProgressiveKITT.addMessage(payload.contents, payload.options);
+      break;
+    case 'pkitt-alert':
+      ProgressiveKITT.addAlert(payload.contents, payload.button.label, payload.options);
+      break;
+    case 'pkitt-confirm':
+      ProgressiveKITT.addConfirm(payload.contents, payload.button1.label, payload.button2.label, payload.options);
+      break;
     }
   }
 };
@@ -467,10 +467,10 @@ var removeCallback = function(type, callback) {
     if (type === undefined || type === callbackType) {
       // If user asked to delete all callbacks in this type or all types
       if (callback === undefined) {
-          _callbacks[callbackType] = [];
-        } else {
-          // Remove all matching callbacks
-          _callbacks[callbackType] = _callbacks[callbackType].filter(compareWithCallbackParameter);
+        _callbacks[callbackType] = [];
+      } else {
+        // Remove all matching callbacks
+        _callbacks[callbackType] = _callbacks[callbackType].filter(compareWithCallbackParameter);
       }
     }
   });
