@@ -1,6 +1,4 @@
 # Progressive UI KITT
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/TalAter/Progressive-UI-KITT.svg)](https://greenkeeper.io/)
 <img src="https://raw.githubusercontent.com/TalAter/Progressive-UI-KITT/master/demo/README-logo.png" align="right" />
 > KITT makes it easy to add a GUI to progressive web apps
 
