@@ -16,8 +16,12 @@ var _guiNodes;
 var _debugState = false;
 var _messages = [];
 var _listenersRegistered = false;
-var _callbacks = { 'show-message': [], 'show-alert': [], 'show-confirm': [], 'hide-message': [] };
-
+var _callbacks = {
+  'show-message': [],
+  'show-alert': [],
+  'show-confirm': [],
+  'hide-message': []
+};
 
 // Return a message element for a given message id
 var _getMessageElement = function(msgID) {
@@ -37,7 +41,7 @@ var _logMessage = function(text, extraParameters = 'font-weight: bold; color: #0
 };
 
 // Checks if GUI was already created
-var _guiCreated = function () {
+var _guiCreated = function() {
   return _guiNodes !== undefined;
 };
 
@@ -82,7 +86,7 @@ var _addMessage = function(contents, options, ...buttons) {
     _logMessage('Invalid options object');
   }
 
-  const messageId = _messages.length+Date.now();
+  const messageId = _messages.length + Date.now();
 
   // Add buttons to contents if needed
   buttons.forEach((button, buttonId) => {
@@ -118,7 +122,9 @@ var _addMessage = function(contents, options, ...buttons) {
         }
         ProgressiveKITT.deleteMessage(messageId);
       };
-      document.getElementById(`progressivekitt-button-${buttonId}-${messageId}`).addEventListener('click', buttonCallback, false);
+      document
+        .getElementById(`progressivekitt-button-${buttonId}-${messageId}`)
+        .addEventListener('click', buttonCallback, false);
     }
   });
 
@@ -137,7 +143,7 @@ var _addMessage = function(contents, options, ...buttons) {
 };
 
 // A listener used to parse messages posted from the service worker
-var _messageListener = function({data: data}) {
+var _messageListener = function({ data: data }) {
   if (typeof data === 'object') {
     var payload = data.payload;
     switch (data.action) {
@@ -159,7 +165,7 @@ var _registerListeners = function() {
   if (_listenersRegistered) {
     return;
   }
-  if('serviceWorker' in navigator){
+  if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('message', _messageListener);
     _listenersRegistered = true;
   }
@@ -185,7 +191,7 @@ var _invokeCallbacks = function(callbackType, ...args) {
 
 // Parse a button argument to make sure it is an object with the structure and contents KITT expects
 var _parseButtonObject = function(button) {
-  let buttonObject = ('string' === typeof button) ? {label: button} : button;
+  let buttonObject = 'string' === typeof button ? { label: button } : button;
   if (!buttonObject.context) {
     buttonObject.context = this;
   }
@@ -204,7 +210,6 @@ var vroom = function() {
   this.render();
 };
 
-
 /**
  * Call after configuring KITT, to render its interface.
  *
@@ -217,7 +222,6 @@ var render = function() {
     _createGUI();
   }
 };
-
 
 /**
  * Set the URL for the stylesheet for the UI
@@ -415,7 +419,7 @@ var debug = function(newState = true) {
  * @method addCallback
  */
 var addCallback = function(type, callback, context) {
-  if (_callbacks[type]  === undefined) {
+  if (_callbacks[type] === undefined) {
     return;
   }
   if (typeof callback !== 'function') {

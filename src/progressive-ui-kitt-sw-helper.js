@@ -12,7 +12,7 @@
 
 // Method used to post messages to all of a service worker's clients, including uncontrolled ones.
 var _postMessageToClients = function(payload, type, client) {
-  const message = {action: `pkitt-${type}`, payload: payload};
+  const message = { action: `pkitt-${type}`, payload: payload };
   if (client) {
     if ('string' === typeof client) {
       self.clients.get(client).then(function(client) {
@@ -32,7 +32,7 @@ var _postMessageToClients = function(payload, type, client) {
 
 // Parse a button argument to make sure it is an object with the structure and contents KITT expects
 var _parseButtonObject = function(button) {
-  return ('string' === typeof button) ? {label: button} : button;
+  return 'string' === typeof button ? { label: button } : button;
 };
 
 /**
