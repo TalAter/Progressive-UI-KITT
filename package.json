@@ -2,27 +2,27 @@
   "name": "progressive-ui-kitt",
   "version": "0.0.1",
   "description": "A flexible GUI for progressive web apps",
+  "keywords": [
+    "apps",
+    "gui",
+    "interface",
+    "progressive",
+    "pwa",
+    "service",
+    "ui",
+    "web",
+    "workers"
+  ],
   "homepage": "https://github.com/TalAter/Progressive-UI-KITT",
+  "bugs": {
+    "url": "https://github.com/TalAter/Progressive-UI-KITT/issues"
+  },
+  "license": "MIT",
+  "author": "Tal Ater <tal@talater.com> (https://www.talater.com/)",
   "main": "progressive-ui-kitt.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TalAter/Progressive-UI-KITT.git"
-  },
-  "keywords": [
-    "service",
-    "workers",
-    "pwa",
-    "progressive",
-    "web",
-    "apps",
-    "gui",
-    "ui",
-    "interface"
-  ],
-  "author": "Tal Ater <tal@talater.com> (https://www.talater.com/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TalAter/Progressive-UI-KITT/issues"
   },
   "scripts": {
     "start": "grunt serve",
