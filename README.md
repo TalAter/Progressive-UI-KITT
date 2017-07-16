@@ -1,5 +1,6 @@
 # Progressive UI KITT
 <img src="https://raw.githubusercontent.com/TalAter/Progressive-UI-KITT/master/demo/README-logo.png" align="right" />
+
 > KITT makes it easy to add a GUI to progressive web apps
 
 Progressive web apps are a fundamental change in how we see the web. In a way, they defy our expectations of what a website is.
