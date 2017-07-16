@@ -4,10 +4,8 @@ node_js:
   - "5"
   - "4"
   - "node"
-rvm:
-  - 2.2
 before_script:
   - gem update --system
-  - gem install sass
+  - gem install sass -v 3.4.25
   - 'npm install -g grunt-cli'
   - 'grunt'
