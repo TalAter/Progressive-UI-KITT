@@ -4,9 +4,9 @@
 
 Progressive web apps are a fundamental change in how we see the web. In a way, they defy our expectations of what a website is.
 
-When a user visits a website, she does not expect it to work if she suddenly loses her connection. Progressive web apps over-deliver on that expectation. On the other hand, if a user is visiting a progressive web app without noticing that his connection is flaky, he may not realize that the content he is seeing may be a few hours (or even days) old. In this case, progressive web apps under-deliver on what the user expects.
+When a user visits a website, they do not expect it to work if they suddenly lose their connection. Progressive web apps over-deliver on that expectation. On the other hand, if a user is visiting a progressive web app without noticing that their connection is flaky, they may not realize that the content they are seeing may be a few hours (or even days) old. In this case, progressive web apps under-deliver on what the user expects.
 
-Educating users about what the modern web can do is a process that will take years. But communicating to the user what your progressive web app can do, is within your power… this is where Progressive UI KITT comes in.
+Educating users about how this new model for a modern web app can do is a process that will take years. But communicating to the user what your progressive web app can do, is within your power… this is where Progressive UI KITT comes in.
 
 ## What is Progressive UI KITT
 
