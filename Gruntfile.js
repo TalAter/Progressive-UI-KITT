@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         dest: 'dist/progressive-ui-kitt.js',
         options: {
           transform: [
-            [ "babelify", {presets: ["es2015"]} ]
+            [ "babelify", {presets: ["env"]} ]
           ],
           plugin: [
             [ "minifyify", { output: "dist/progressive-ui-kitt.js.map", map: 'progressive-ui-kitt.js.map' } ],
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         dest: 'dist/progressive-ui-kitt-sw-helper.js',
         options: {
           transform: [
-            [ "babelify", {presets: ["es2015"]} ]
+            [ "babelify", {presets: ["env"]} ]
           ],
           plugin: [
             [ "minifyify", { output: "dist/progressive-ui-kitt-sw-helper.js.map", map: 'progressive-ui-kitt-sw-helper.js.map' } ],
